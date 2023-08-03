@@ -47,6 +47,9 @@ For Example: importing a stylesheet called 'styles.css' would look like:
 <link rel="stylesheet" href="/resources/styles.css">
 ```
 
+### Importing Scripts
+For JavaScript scripts, there is also the option of storing the, in the **/scripts** directory.
+
 ## Custom Error Pages
 If you wish for your website to have custom error pages, then create a file with the name: **{HTTP Error Code}.html** in the **/errors** directory.
 

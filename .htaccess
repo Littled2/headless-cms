@@ -1,8 +1,6 @@
 RewriteEngine on
 
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
-
 RewriteCond %{REQUEST_URI} !^/resources/(.*)$
+RewriteCond %{REQUEST_URI} !^/scripts/(.*)$
 
-RewriteRule ^(.*)$ /index.php [NC,L,QSA]
+RewriteRule ^(.*)$ /index.php [NC,L]

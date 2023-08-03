@@ -10,6 +10,13 @@
 
     $page = handle_request();
 
+    // If request comes from the client side router, then the whole page does not need to be sent
+    if(isset($_GET["csr"]) && $_GET["csr"] == 'true') {
+        header('Content-type: application/json');
+        echo json_encode($page);
+        exit;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +24,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Import the Client Side Router -->
+    <script defer src="/scripts/client-side-router.js"></script>
 
     <!-- Import Alpine JS -->
     <!-- Remove this if you don't wish to use Alpine JS within you webpages -->

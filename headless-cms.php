@@ -52,9 +52,9 @@ function get_requested_path() {
     if(array_key_exists('PATH_INFO', $_SERVER)) {
         $requested_file_name = $_SERVER['PATH_INFO'];
     } else {
-        $requested_file_name = $_SERVER['REQUEST_URI'];
+        $requested_file_name = explode('?', $_SERVER['REQUEST_URI'])[0];
     }
-
+    
     return $requested_file_name;
 }
 
