@@ -70,6 +70,7 @@ function handle_error($error_code) {
 
         $raw_page_content = get_page_content($real_path);
 
+        // Then something went wrong with reading the file
         if($raw_page_content == false) exit;
 
         $page_parts = parse_page_content($raw_page_content);
@@ -79,7 +80,7 @@ function handle_error($error_code) {
             return new Page($page_parts[0], null);
         }
         
-        return new Page($page_parts[0], $page_parts[1]);
+        return new Page($page_parts[1], $page_parts[0]);
     }
 
     return new Page('Error ' . $error_code, null);

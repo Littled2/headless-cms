@@ -46,13 +46,28 @@
 
 
     <!-- Add stylesheet imports here -->
-    <link rel= "stylesheet" href="/resources/default-styles.css">
+    <link rel="stylesheet" href="/resources/stylesheets/globals.css">
 
 </head>
 <body>
 
     <header>
-
+        <div class="logo">
+            <span class="accent">{</span>
+            <span class="logo-text">eb.</span>
+            <span class="accent">}</span>
+        </div>
+        <nav class="flex-1">
+            <ul>
+                <li>
+                    <small class="mono accent">01.</small>
+                    <span>Blog</span>
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <button class="button">Learn More</button>
+        </div>
     </header>
 
     <main>
