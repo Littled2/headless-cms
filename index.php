@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Import the Client Side Router -->
-    <script defer src="/scripts/client-side-router.js"></script>
+    <script defer src="/headless-cms-scripts/client-side-router.js"></script>
 
     <!-- Import Alpine JS -->
     <!-- Remove this if you don't wish to use Alpine JS within you webpages -->
