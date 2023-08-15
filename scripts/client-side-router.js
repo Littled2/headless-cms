@@ -68,6 +68,8 @@ class Client_Side_Router {
         if(!navigateBack) history.pushState({ url: url }, title, url)
 
         this.init_links()
+
+        dispatchEvent(new Event('load'))
     }
 
     async fetch_page_content(url) {

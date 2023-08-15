@@ -9,6 +9,7 @@ Webpages on your website are represented in the /webpages directory, following t
 For example: A website with three webpages, at paths: **/**, **/contact-us**, and **/projects/my-first-project** would look like:
 
 ```
+│
 ├── page.html
 │
 ├── contact-us/
@@ -38,6 +39,9 @@ Description: This is the description of the webpage
 
 ```
 
+Read more about page settings later on.
+
+
 ## Stylesheets and Other Resources
 To use stylesheets, images or any other resources from the same domain, store them in the **/resources** directory. Make sure when they are referenced in the webpage to include the **/resources** directory name.
 
@@ -56,6 +60,35 @@ If you wish for your website to have custom error pages, then create a file with
 For example, a custom 404 page would be created at: **/errors/404.html**
 
 These pages are inserted into the **index.php** file in the same way as any other page.
+
+## Page Settings
+Page settings are the key-value pairs that you put at the top of your .html file.
+To use page settings, put them at the top of the page, and separate them from the rest of the html file using a line of
+only equals '=' characters.
+
+```html
+<!-- These are the page settings -->
+Title: My Webpage
+Description: This is the description of the webpage
+Hide_Heading
+=================
+
+<h1>This is a heading</h1>
+<p>This is a paragraph</p>
+
+```
+
+**Note:** Page Settings supports *inline* HTML comments. Not multiline!
+
+### Supported page settings:
+| Setting Name | Value | Description |          
+| ------------ | ----- | ----------- |
+| Title        | 'Page Title' | This will set the page's ```<title/>``` tag |
+| Description  | 'Page Description' | This will set the page's ```<meta  name="description" />``` tag |
+| Hide_Heading   | - |Just adding this key will hide the heading from showing on this page |
+| Hide_Footer    | - |Just adding this key will hide the footer from showing on this page |
+
+*Page setting names (keys) are NOT case-sensitive. Eg. to set the title both 'Title' and 'title' will work fine*
 
 ## Other Points to Note
 - By default, AlpineJS is imported to every webpage, if you don't with to use AlpineJS in your website, simply remove the import tag from the **index.php** file.

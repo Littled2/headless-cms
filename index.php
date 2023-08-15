@@ -43,6 +43,7 @@
     ?>">
 
     <!-- Add script imports here -->
+    <script defer src="/scripts/typewriter.js"></script>
 
 
     <!-- Add stylesheet imports here -->
@@ -50,24 +51,37 @@
 
 </head>
 <body>
-
-    <header>
-        <div class="logo">
+    <header
+        <?php
+            echo isset($page->settings['hide_heading']) ? 'style="display: none"' : ''
+        ?>
+    >
+        <a href="/" class="logo">
             <span class="accent">{</span>
             <span class="logo-text">eb.</span>
             <span class="accent">}</span>
-        </div>
-        <nav class="flex-1">
-            <ul>
+        </a>
+        <nav class="flex-1 nav">
+            <ul class="nav-links">
                 <li>
-                    <small class="mono accent">01.</small>
-                    <span>Blog</span>
+                    <a href="#what-i-do">
+                        <small class="mono accent">01.</small>
+                        <span>About Me</span>
+                    </a>
+                </li>
+                <li>
+                    <small class="mono accent">02.</small>
+                    <span>What I Do</span>
+                </li>
+                <li>
+                    <a href="/#featured-projects">
+                        <small class="mono accent">03.</small>
+                        <span>Projects</span>
+                    </a>
                 </li>
             </ul>
         </nav>
-        <div>
-            <button class="button">Learn More</button>
-        </div>
+        <a href="/blog" class="button">Read my Blog</a>
     </header>
 
     <main>
@@ -75,8 +89,12 @@
         <?php echo $page->content; ?>
     </main>
 
-    <footer>
-
+    <footer
+        <?php
+            echo isset($page->settings['hide_footer']) ? 'style="display: none"' : ''
+        ?>
+    >
+        <p class="mono">Congratulations! You reached the bottom</p>
     </footer>
 
 </body>

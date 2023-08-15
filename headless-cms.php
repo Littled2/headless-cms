@@ -1,7 +1,10 @@
 <?php
-
+/**
+ * Called to process every request to the server
+ */
 function handle_request() {
 
+    // Gets the path of the webpage file on the local system
     $real_path = __DIR__ . '/webpages' . get_requested_path() . '/page.html' ;
 
     if(!does_page_exist($real_path)) {
@@ -83,7 +86,7 @@ function handle_error($error_code) {
         return new Page($page_parts[1], $page_parts[0]);
     }
 
-    return new Page('Error ' . $error_code, null);
+    return new Page('Error ' . $error_code, 'hide_footer');
 }
 
 
@@ -98,12 +101,25 @@ function parse_page_content($page_content) {
 
 function parse_raw_settings_block($raw_settings_block) {
 
+    $raw_settings_block = preg_replace("/<!--(.*?)-->/", "", $raw_settings_block);
+
     $temp_settings = array();
 
     // Iterate over each new line
     foreach(preg_split("/((\r?\n)|(\r\n?))/", $raw_settings_block) as $line) {
         // Split the line on the first ':' character
         $parts = explode(':', $line);
+
+        if(count($parts) == 1) {
+            // Then set as key-only setting
+            $keyName = strtolower(trim($parts[0]));
+
+            // Then key name is invalid
+            if($keyName === '') continue;
+
+            $temp_settings[$keyName] = true;
+            continue;
+        }
 
         if(count($parts) !== 2) {
             // Then is malformed settings line
@@ -114,17 +130,19 @@ function parse_raw_settings_block($raw_settings_block) {
         $key = strtolower(trim($parts[0]));
         $value = trim($parts[1]);
 
-        switch ($key) {
-            case 'title':
-                $temp_settings['title'] = $value;
-                break;
-            case 'description':
-                $temp_settings['description'] = $value;
-                break;
-            default:
-                // Then setting name is not recognised
-                break;
-        }
+        $temp_settings[$key] = $value;
+
+        // switch ($key) {
+        //     case 'title':
+        //         $temp_settings['title'] = $value;
+        //         break;
+        //     case 'description':
+        //         $temp_settings['description'] = $value;
+        //         break;
+        //     default:
+        //         // Then setting name is not recognised
+        //         break;
+        // }
     }
 
     return $temp_settings;
