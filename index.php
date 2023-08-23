@@ -42,6 +42,17 @@
         echo isset($page->settings['description']) ? $page->settings['title'] : 'Default Description'
     ?>">
 
+    <?php
+        if(isset($page->settings['favicon'])) {
+            echo "<link rel='shortcut icon' type='image' href='{$page->settings['favicon']}' />";
+        } else {
+            echo '<link rel="shortcut icon" type="image" href="/resources/favicon.png" />';
+        }
+    ?>
+
+
+
+
     <!-- Add script imports here -->
     <script defer src="/scripts/typewriter.js"></script>
 
@@ -49,39 +60,18 @@
     <!-- Add stylesheet imports here -->
     <link rel="stylesheet" href="/resources/stylesheets/globals.css">
 
+    <link rel="stylesheet" href="/resources/stylesheets/utils.css">
+
 </head>
 <body>
-    <header
-        <?php
-            echo isset($page->settings['hide_heading']) ? 'style="display: none"' : ''
-        ?>
-    >
-        <a href="/" class="logo">
-            <span class="accent">{</span>
-            <span class="logo-text">eb.</span>
-            <span class="accent">}</span>
-        </a>
-        <nav class="flex-1 nav">
-            <ul class="nav-links">
-                <li>
-                    <a href="#what-i-do">
-                        <small class="mono accent">01.</small>
-                        <span>About Me</span>
-                    </a>
-                </li>
-                <li>
-                    <small class="mono accent">02.</small>
-                    <span>What I Do</span>
-                </li>
-                <li>
-                    <a href="/#featured-projects">
-                        <small class="mono accent">03.</small>
-                        <span>Projects</span>
-                    </a>
-                </li>
-            </ul>
+    <header <?php echo isset($page->settings['hide_heading']) ? 'style="display: none"' : '' ?>>
+        <nav>
+            <a>Home</a>
+            <a>The Committee</a>
+            <a>Hack SW</a>
+            <a>Student Mentoring</a>
+            <a>Partners</a>
         </nav>
-        <a href="/blog" class="button">Read my Blog</a>
     </header>
 
     <main>
@@ -89,12 +79,8 @@
         <?php echo $page->content; ?>
     </main>
 
-    <footer
-        <?php
-            echo isset($page->settings['hide_footer']) ? 'style="display: none"' : ''
-        ?>
-    >
-        <p class="mono">Congratulations! You reached the bottom</p>
+    <footer <?php echo isset($page->settings['hide_footer']) ? 'style="display: none"' : '' ?> >
+        
     </footer>
 
 </body>
