@@ -5,16 +5,27 @@
 function handle_request() {
 
     // Gets the path of the webpage file on the local system
-    $real_path = __DIR__ . '/webpages' . get_requested_path() . '/page.html' ;
+    $requested_path = get_requested_path();
+
+    // Ensure there is a trailing slash
+    if(!substr($requested_path, -1) !== '/') {
+        $requested_path = $requested_path . '/';
+    }
+
+    $real_path = __DIR__ . '/webpages' . $requested_path . 'page.html' ;
 
     if(!does_page_exist($real_path)) {
         return handle_error(404);
     }
 
     $raw_page_content = get_page_content($real_path);
-
+    
     if($raw_page_content == false) {
         return handle_error(500);
+    }
+
+    if($raw_page_content == '') {
+        return new Page('', null);
     }
 
     $page_parts = parse_page_content($raw_page_content);

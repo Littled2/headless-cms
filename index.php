@@ -51,27 +51,17 @@
     ?>
 
 
-
-
-    <!-- Add script imports here -->
-    <script defer src="/scripts/typewriter.js"></script>
-
-
     <!-- Add stylesheet imports here -->
-    <link rel="stylesheet" href="/resources/stylesheets/globals.css">
 
-    <link rel="stylesheet" href="/resources/stylesheets/utils.css">
+
+
+
+
 
 </head>
 <body>
     <header <?php echo isset($page->settings['hide_heading']) ? 'style="display: none"' : '' ?>>
-        <nav>
-            <a>Home</a>
-            <a>The Committee</a>
-            <a>Hack SW</a>
-            <a>Student Mentoring</a>
-            <a>Partners</a>
-        </nav>
+
     </header>
 
     <main>
@@ -80,7 +70,7 @@
     </main>
 
     <footer <?php echo isset($page->settings['hide_footer']) ? 'style="display: none"' : '' ?> >
-        
+
     </footer>
 
 </body>
