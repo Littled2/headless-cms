@@ -39,8 +39,18 @@
 
     <!-- Page Description -->
     <meta name="description" content="<?php
-        echo isset($page->settings['description']) ? $page->settings['title'] : 'Default Description'
+        echo isset($page->settings['description']) ? $page->settings['description'] : 'Default Description'
     ?>">
+    <meta name="og:description" content="<?php
+        echo isset($page->settings['description']) ? $page->settings['description'] : 'Default Description'
+    ?>">
+
+    <?php
+        if(isset($page->settings["og-image"])) {
+            echo "<meta property='og:image' content='{$page->settings["og-image"]}' />";
+        }
+    ?>
+
 
     <?php
         if(isset($page->settings['favicon'])) {
