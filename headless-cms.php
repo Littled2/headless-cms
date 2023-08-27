@@ -28,7 +28,11 @@ function handle_request() {
         return new Page('', null);
     }
 
-    $page_parts = parse_page_content($raw_page_content);
+    list($hasSettings, $page_parts) = parse_page_content($raw_page_content);
+
+    if($hasSettings && count($page_parts) == 1) {
+        return new Page('', $page_parts[0]);
+    }
 
     if(count($page_parts) !== 2) {
         // Then there is no splitter line
@@ -87,7 +91,11 @@ function handle_error($error_code) {
         // Then something went wrong with reading the file
         if($raw_page_content == false) exit;
 
-        $page_parts = parse_page_content($raw_page_content);
+        list($hasSettings, $page_parts) = parse_page_content($raw_page_content);
+
+        if($hasSettings && count($page_parts) == 1) {
+            return new Page('', $page_parts[0]);
+        }
 
         if(count($page_parts) !== 2) {
             // Then there is no splitter line
@@ -103,11 +111,14 @@ function handle_error($error_code) {
 
 function parse_page_content($page_content) {
 
+    // Does the page have page settings
+    $hasSettings = preg_match('/^.[=]+([\s]+)?$/m', $page_content) > 0;    
+
     // Split the file on a line of equals characters (The separator between setting and the page content)
     // From now on, this line will be referred to as a 'splitter' line.
-    $split = preg_split('/^.[=]+[\s]+$/m', $page_content);
+    $split = preg_split('/^.[=]+([\s]+)?$/m', $page_content);
 
-    return $split;
+    return array($hasSettings, $split);
 }
 
 function parse_raw_settings_block($raw_settings_block) {

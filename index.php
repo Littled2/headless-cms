@@ -34,15 +34,15 @@
 
     <!-- Page Title -->
     <title><?php
-        echo isset($page->settings['title']) ? $page->settings['title'] : 'Default Title'
+        echo isset($page->settings['title']) ? $page->settings['title'] : ''
     ?></title>
 
     <!-- Page Description -->
     <meta name="description" content="<?php
-        echo isset($page->settings['description']) ? $page->settings['description'] : 'Default Description'
+        echo isset($page->settings['description']) ? $page->settings['description'] : ''
     ?>">
     <meta name="og:description" content="<?php
-        echo isset($page->settings['description']) ? $page->settings['description'] : 'Default Description'
+        echo isset($page->settings['description']) ? $page->settings['description'] : ''
     ?>">
 
     <?php
