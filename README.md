@@ -2,7 +2,7 @@
 
 ## About
 
-A very simple PHP based headless CMS for simple static websites.
+A very simple PHP based headless CMS for simple static websites. Complete with a client side router.
 
 Webpages on your website are represented in the /webpages directory, following the file structure used there.
 
@@ -91,6 +91,28 @@ Hide_Heading
 | Hide_Footer    | - |Just adding this key will hide the footer from showing on this page |
 
 *Page setting names (keys) are NOT case-sensitive. Eg. to set the title both 'Title' and 'title' will work fine*
+
+## Client Side Router (CSR)
+All websites built with this headless CMS use the built-in client side router.
+
+This means that when the user navigates, rather than reloading the entire page the CSR will instead fetch this page and replace the existing page, without performing a full-page navigation.
+
+The CSR also caches the 5 most recently visited pages, this makes navigating back appear almost instant.
+
+### Triggering the CSR
+By default the CSR will override the default navigation behavior of any link that points to a page that is from the same origin (Same domain, sub-domains and protocol).
+
+#### Tiggering the CSR with JavaScript
+
+```js
+// Trigger the Client Side Router to navigate to a URL
+// using the navigate_to_page() function.
+
+window.router.navigate_to_page(url)
+
+```
+
+*It should be noted that the CSR is mounted **after** The page has fully loaded.*
 
 ## Other Points to Note
 - By default, AlpineJS is imported to every webpage, if you don't with to use AlpineJS in your website, simply remove the import tag from the **index.php** file.

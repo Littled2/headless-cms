@@ -113,7 +113,7 @@ class Client_Side_Router {
         this.apply_page_settings(pageData.settings)
 
         // Do not add page to history if navigating back
-        if(!navigateBack) history.pushState({ url: url }, pageData.settings.title, url)
+        if(!navigateBack) history.pushState({ url: url }, pageData?.settings?.title, url)
 
         this.init_links()
 
@@ -137,7 +137,7 @@ class Client_Side_Router {
     apply_page_settings(settings) {
         
         // Set the document's title
-        document.title = 'title' in settings ? settings.title : ''
+        document.title = settings?.title ? settings.title : ''
 
         // Set the document's description on both the description meta tag and the og: description tag
         document.querySelectorAll('meta[name=description], meta[name="og:description]"')
