@@ -26,18 +26,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Import the Client Side Router -->
+    <!-- Remove this if you don't wish to use the client-side routing function of the Headless CMS -->
     <script defer src="/headless-cms-scripts/client-side-router.js"></script>
 
     <!-- Import Alpine JS -->
-    <!-- Remove this if you don't wish to use Alpine JS within you webpages -->
+    <!-- Remove this if you don't wish to use Alpine JS across you webpages -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Page Title -->
+
+    <!-- If the title property is set, insert here. -->
     <title><?php
         echo isset($page->settings['title']) ? $page->settings['title'] : ''
     ?></title>
 
-    <!-- Page Description -->
+    <!-- If the description property is set, insert here. -->
     <meta name="description" content="<?php
         echo isset($page->settings['description']) ? $page->settings['description'] : ''
     ?>">
@@ -45,13 +47,14 @@
         echo isset($page->settings['description']) ? $page->settings['description'] : ''
     ?>">
 
+    <!-- If the og-image property is set, insert here. -->
     <?php
         if(isset($page->settings["og-image"])) {
             echo "<meta property='og:image' content='{$page->settings["og-image"]}' />";
         }
     ?>
 
-
+    <!-- If the favicon property is set, insert here. Default favicon is "/resources/favicon.png" -->
     <?php
         if(isset($page->settings['favicon'])) {
             echo "<link rel='shortcut icon' type='image' href='{$page->settings['favicon']}' />";
@@ -64,7 +67,7 @@
     <!-- Add stylesheet imports here -->
 
 
-
+    <script src="/headless-cms-scripts/log-visit.js"></script>
 
 
 
@@ -75,7 +78,7 @@
     </header>
 
     <main>
-        <!-- Insert the page body in here -->
+        <!-- Insert the page content in here -->
         <?php echo $page->content; ?>
     </main>
 

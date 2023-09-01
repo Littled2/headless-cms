@@ -21,7 +21,6 @@ For example: A website with three webpages, at paths: **/**, **/contact-us**, an
     └── my-first-project
         │
         └── page.html
-
 ```
 
 ## How to structure a page.html file
@@ -102,7 +101,7 @@ The CSR also caches the 5 most recently visited pages, this makes navigating bac
 ### Triggering the CSR
 By default the CSR will override the default navigation behavior of any link that points to a page that is from the same origin (Same domain, sub-domains and protocol).
 
-#### Tiggering the CSR with JavaScript
+#### Triggering the CSR with JavaScript
 
 ```js
 // Trigger the Client Side Router to navigate to a URL
@@ -116,3 +115,9 @@ window.router.navigate_to_page(url)
 
 ## Other Points to Note
 - By default, AlpineJS is imported to every webpage, if you don't with to use AlpineJS in your website, simply remove the import tag from the **index.php** file.
+
+
+# Future Work
+- Stylesheets for specific pages
+- Example directory structure that follows the CMS' structure
+- Tool to build static site
