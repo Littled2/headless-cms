@@ -176,7 +176,7 @@ class Page {
 
         // If there is a styles.css file, then include the styles in the page
         if(is_file($styles_path)) {
-            $this->content = $this->content . "<style>\n\n" . file_get_contents($styles_path) . "\n</style>.\n\n\n";
+            $this->content = "<style>\n\n" . file_get_contents($styles_path) . "\n</style>\n\n" . $this->content;
         }
 
         if($raw_settings_block !== null) {
