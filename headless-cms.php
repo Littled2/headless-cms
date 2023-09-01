@@ -12,43 +12,43 @@ function handle_request() {
         $requested_path = $requested_path . '/';
     }
 
-    $real_path = __DIR__ . '/webpages' . $requested_path . 'page.html' ;
+    // Path to page.html file
+    $dir_path = __DIR__ . '/webpages' . $requested_path;
 
-    if(!does_page_exist($real_path)) {
+    if(!does_page_exist($dir_path)) {
         return handle_error(404);
     }
 
-    $raw_page_content = get_page_content($real_path);
+    $raw_page_content = get_page_content($dir_path);
     
     if($raw_page_content == false) {
         return handle_error(500);
     }
 
     if($raw_page_content == '') {
-        return new Page('', null);
+        return new Page($dir_path, '', null);
     }
 
     list($hasSettings, $page_parts) = parse_page_content($raw_page_content);
 
     if($hasSettings && count($page_parts) == 1) {
-        return new Page('', $page_parts[0]);
+        return new Page($dir_path, '', $page_parts[0]);
     }
 
     if(count($page_parts) !== 2) {
         // Then there is no splitter line
-        return new Page($page_parts[0], null);
+        return new Page($dir_path, $page_parts[0], null);
     }
 
-    return new Page($page_parts[1], $page_parts[0]);
-
+    return new Page($dir_path, $page_parts[1], $page_parts[0]);
 
 }
 
-function get_page_content($path) {
+function get_page_content($dir_path) {
     try {
-        
-        // Get the page content
-        return file_get_contents($path);
+
+        // Get the page.html content
+        return file_get_contents($dir_path . 'page.html');
 
     } catch (\Throwable $th) {
         
@@ -57,8 +57,8 @@ function get_page_content($path) {
     }
 }
 
-function does_page_exist($path) {
-    if(is_file(($path))) {
+function does_page_exist($dir_path) {
+    if(is_file(($dir_path . 'page.html'))) {
         return true;
     }
     return false;
@@ -81,12 +81,12 @@ function handle_error($error_code) {
     // Set the correct HTTP response code
     http_response_code($error_code);
 
-    $real_path = __DIR__ . '/errors' . '/' . $error_code . '.html' ;
+    $error_dir_path = __DIR__ . '/errors' . '/' . $error_code . '/' ;
 
     // Is there an error page
-    if(is_file($real_path)) {
+    if(does_page_exist($error_dir_path)) {
 
-        $raw_page_content = get_page_content($real_path);
+        $raw_page_content = get_page_content($error_dir_path);
 
         // Then something went wrong with reading the file
         if($raw_page_content == false) exit;
@@ -94,18 +94,18 @@ function handle_error($error_code) {
         list($hasSettings, $page_parts) = parse_page_content($raw_page_content);
 
         if($hasSettings && count($page_parts) == 1) {
-            return new Page('', $page_parts[0]);
+            return new Page($error_dir_path, '', $page_parts[0]);
         }
 
         if(count($page_parts) !== 2) {
             // Then there is no splitter line
-            return new Page($page_parts[0], null);
+            return new Page($error_dir_path, $page_parts[0], null);
         }
         
-        return new Page($page_parts[1], $page_parts[0]);
+        return new Page($error_dir_path, $page_parts[1], $page_parts[0]);
     }
 
-    return new Page('Error ' . $error_code, 'hide_footer');
+    return new Page($error_dir_path, 'Error ' . $error_code, 'hide_footer');
 }
 
 
@@ -154,17 +154,6 @@ function parse_raw_settings_block($raw_settings_block) {
 
         $temp_settings[$key] = $value;
 
-        // switch ($key) {
-        //     case 'title':
-        //         $temp_settings['title'] = $value;
-        //         break;
-        //     case 'description':
-        //         $temp_settings['description'] = $value;
-        //         break;
-        //     default:
-        //         // Then setting name is not recognised
-        //         break;
-        // }
     }
 
     return $temp_settings;
@@ -174,10 +163,21 @@ class Page {
 
     public $content;
     public $settings;
+    private $dir_path;
 
-    function __construct($page_content, $raw_settings_block) {
+    function __construct($dir_path, $page_content, $raw_settings_block) {
 
         $this->content = $page_content;
+        $this->dir_path = $dir_path;
+
+
+        // Is there a styles.css file
+        $styles_path = $dir_path . 'styles.css';
+
+        // If there is a styles.css file, then include the styles in the page
+        if(is_file($styles_path)) {
+            $this->content = $this->content . "<style>\n\n" . file_get_contents($styles_path) . "\n</style>.\n\n\n";
+        }
 
         if($raw_settings_block !== null) {
             $this->settings = parse_raw_settings_block($raw_settings_block);

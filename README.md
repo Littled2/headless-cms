@@ -41,13 +41,27 @@ Description: This is the description of the webpage
 Read more about page settings later on.
 
 
-## Stylesheets and Other Resources
-To use stylesheets, images or any other resources from the same domain, store them in the **/resources** directory. Make sure when they are referenced in the webpage to include the **/resources** directory name.
+## Stylesheets
+Headless CMS supports two ways of using stylesheets, depending on whether you want the CSS styles to be available globally across all page, or just on a specific page.
 
-For Example: importing a stylesheet called 'styles.css' would look like:
+### 1. Global Styles
+Store these stylesheets the same as any other resource in the **/resources** directory. Link to these stylesheets from the <head> tag of the index.php file, so they are loaded with every page.
+
+### 2. Page-Specific Styles
+If styles are only intended to be used on one webpage, reduce unused CSS by adding a **styles.css** file to that page's directory.
+
+For example: If the page at **/test** required some page-specific styles you would create the file **/webpages/test/styles.css**. The styles in this file will *automatically* be inserted with the page content from the **page.html** file.
+
+
+## General Resources
+To store any resources such as stylesheets or images, store them in the **/resources** directory.
+
+Make sure when you reference them in a webpage, you include the **/resources/...** directory name.
+
+For Example: Referencing an image stored at **/resources/images/photo.png** would look like:
 
 ```html
-<link rel="stylesheet" href="/resources/styles.css">
+<img src="/resources/images/photo.png">
 ```
 
 ### Importing Scripts
@@ -117,7 +131,7 @@ window.router.navigate_to_page(url)
 - By default, AlpineJS is imported to every webpage, if you don't with to use AlpineJS in your website, simply remove the import tag from the **index.php** file.
 
 
+
 # Future Work
-- Stylesheets for specific pages
 - Example directory structure that follows the CMS' structure
 - Tool to build static site
