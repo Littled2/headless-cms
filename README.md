@@ -96,12 +96,12 @@ Hide_Heading
 ### Supported page settings:
 | Setting Name | Value | Description |          
 | ------------ | ----- | ----------- |
-| Title        | 'Page Title' | This will set the page's ```<title/>``` tag |
-| Description  | 'Page Description' | This will set the page's ```<meta  name="description" />``` tag |
-| Favicon      | /resources/... Path to image | This will set the shortcut 'favicon' for this page. The default favicon value is: /resources/favicon.png |
+| title        | 'Page Title' | This will set the page's ```<title/>``` tag |
+| description  | 'Page Description' | This will set the page's ```<meta  name="description" />``` tag |
+| favicon      | /resources/... Path to image | This will set the shortcut 'favicon' for this page. The default favicon value is: /resources/favicon.png |
 | og-image | /resources/... Path to image | Use this to set the Open Graph Protocol image, so a link to this page renders well when shared on social media. Learn more about the Open Graph Protocol [here](https://ogp.me/). |
-| Hide_Heading   | - |Just adding this key will hide the heading from showing on this page |
-| Hide_Footer    | - |Just adding this key will hide the footer from showing on this page |
+| hide_heading   | - |Just adding this key will hide the heading from showing on this page |
+| hide_footer    | - |Just adding this key will hide the footer from showing on this page |
 
 *Page setting names (keys) are NOT case-sensitive. Eg. to set the title both 'Title' and 'title' will work fine*
 
