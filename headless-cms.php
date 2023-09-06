@@ -199,6 +199,8 @@ class Page {
     }
 
     function get_property($property_name) {
+
+        // Check this setting exists
         if(isset($this->settings[$property_name])) {
 
             switch ($property_name) {
@@ -213,6 +215,14 @@ class Page {
             }
 
             return $this->settings[$property_name];
+        }
+
+
+        // Page setting is NOT set
+
+        switch ($property_name) {
+            case 'favicon':
+                return "<link rel='shortcut icon' type='image' href='{$this->settings[$property_name]}' />";
         }
 
         return '';
