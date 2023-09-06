@@ -118,7 +118,7 @@ function handle_error($error_code) {
         return new Page($error_dir_path, $page_parts[1], $page_parts[0]);
     }
 
-    return new Page($error_dir_path, 'Error ' . $error_code, 'hide_footer');
+    return new Page($error_dir_path, "<p style='text-align:center;>'Error {$error_code}</p>", null);
 }
 
 function parse_page_content($page_content) {
@@ -183,7 +183,7 @@ class Page {
         $this->dir_path = $dir_path;
 
 
-        // Is there a styles.css file
+        // Path to possible styles.css file
         $styles_path = $this->dir_path . 'styles.css';
 
         // If there is a styles.css file, then include the styles in the page

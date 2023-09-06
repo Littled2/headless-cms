@@ -22,16 +22,16 @@
 
 
     <!-- If the title property is set, insert here. -->
-    <?php $page->get_property('title') ?>
+    <?php echo $page->get_property('title') ?>
 
     <!-- If the description property is set, insert here. -->
-    <?php $page->get_property('description') ?>
+    <?php echo $page->get_property('description') ?>
 
     <!-- If the og-image property is set, insert here. -->
-    <?php $page->get_property('og-image') ?>
+    <?php echo $page->get_property('og-image') ?>
 
     <!-- If the favicon property is set, insert here. -->
-    <?php $page->get_property('favicon') ?>
+    <?php echo $page->get_property('favicon') ?>
 
 
 
