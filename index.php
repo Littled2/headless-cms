@@ -42,31 +42,20 @@
 </head>
 <body>
 
+    <header>
 
-    <?php if($page->get_property('hide-heading')): ?>
+    </header>
 
-        <header>
-
-        </header>
-
-    <?php endif; ?>
-
-
-
+    
     <main>
         <!-- Insert the page content in here -->
         <?php echo $page->content; ?>
     </main>
 
 
+    <footer>
 
-    <?php if($page->get_property('hide-footer')): ?>
-
-        <footer>
-
-        </footer>
-
-    <?php endif; ?>
+    </footer>
 
 </body>
 </html>
