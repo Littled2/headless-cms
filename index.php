@@ -2,20 +2,7 @@
 
     require_once "headless-cms.php";
 
-    // Requests must be GET
-    if($_SERVER["REQUEST_METHOD"] !== "GET") {
-        http_response_code(405);
-        exit;
-    }
-
     $page = handle_request();
-
-    // If request comes from the client side router, then the whole page does not need to be sent
-    if(isset($_GET["csr"]) && $_GET["csr"] == 'true') {
-        header('Content-type: application/json');
-        echo json_encode($page);
-        exit;
-    }
 
 ?>
 
@@ -35,56 +22,51 @@
 
 
     <!-- If the title property is set, insert here. -->
-    <title><?php
-        echo isset($page->settings['title']) ? $page->settings['title'] : ''
-    ?></title>
+    <?php $page->get_property('title') ?>
 
     <!-- If the description property is set, insert here. -->
-    <meta name="description" content="<?php
-        echo isset($page->settings['description']) ? $page->settings['description'] : ''
-    ?>">
-    <meta name="og:description" content="<?php
-        echo isset($page->settings['description']) ? $page->settings['description'] : ''
-    ?>">
+    <?php $page->get_property('description') ?>
 
     <!-- If the og-image property is set, insert here. -->
-    <?php
-        if(isset($page->settings["og-image"])) {
-            echo "<meta property='og:image' content='{$page->settings["og-image"]}' />";
-        }
-    ?>
+    <?php $page->get_property('og-image') ?>
 
-    <!-- If the favicon property is set, insert here. Default favicon is "/resources/favicon.png" -->
-    <?php
-        if(isset($page->settings['favicon'])) {
-            echo "<link rel='shortcut icon' type='image' href='{$page->settings['favicon']}' />";
-        } else {
-            echo '<link rel="shortcut icon" type="image" href="/resources/favicon.png" />';
-        }
-    ?>
+    <!-- If the favicon property is set, insert here. -->
+    <?php $page->get_property('favicon') ?>
+
 
 
     <!-- Add stylesheet imports here -->
 
 
-    <script src="/headless-cms-scripts/log-visit.js"></script>
-
-
 
 </head>
 <body>
-    <header <?php echo isset($page->settings['hide_heading']) ? 'style="display: none"' : '' ?>>
 
-    </header>
+
+    <?php if($page->get_property('hide-heading')): ?>
+
+        <header>
+
+        </header>
+
+    <?php endif; ?>
+
+
 
     <main>
         <!-- Insert the page content in here -->
         <?php echo $page->content; ?>
     </main>
 
-    <footer <?php echo isset($page->settings['hide_footer']) ? 'style="display: none"' : '' ?> >
 
-    </footer>
+
+    <?php if($page->get_property('hide-footer')): ?>
+
+        <footer>
+
+        </footer>
+
+    <?php endif; ?>
 
 </body>
 </html>

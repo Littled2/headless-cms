@@ -4,6 +4,19 @@
  */
 function handle_request() {
 
+    $page = get_page();
+
+    // If request comes from the client side router, then the whole page does not need to be sent
+    if(isset($_GET["csr"]) && $_GET["csr"] == 'true') {
+        header('Content-type: application/json');
+        echo json_encode($page);
+        exit;
+    }
+
+    return $page;
+}
+
+function get_page() {
     // Gets the path of the webpage file on the local system
     $requested_path = get_requested_path();
 
@@ -108,7 +121,6 @@ function handle_error($error_code) {
     return new Page($error_dir_path, 'Error ' . $error_code, 'hide_footer');
 }
 
-
 function parse_page_content($page_content) {
 
     // Does the page have page settings
@@ -172,7 +184,7 @@ class Page {
 
 
         // Is there a styles.css file
-        $styles_path = $dir_path . 'styles.css';
+        $styles_path = $this->dir_path . 'styles.css';
 
         // If there is a styles.css file, then include the styles in the page
         if(is_file($styles_path)) {
@@ -184,6 +196,26 @@ class Page {
         } else {
             $this->settings = null;
         }
+    }
+
+    function get_property($property_name) {
+        if(isset($this->settings[$property_name])) {
+
+            switch ($property_name) {
+                case 'title':
+                    return "<title>{$this->settings[$property_name]}</title>";
+                case 'description':
+                    return "<meta name='description' content='{$this->settings[$property_name]}'><meta name='og:description' content='{$this->settings[$property_name]}'>";
+                case 'og-image':
+                    return "<meta property='og:image' content='{$this->settings[$property_name]}' />";
+                case 'favicon':
+                    return "<link rel='shortcut icon' type='image' href='{$this->settings[$property_name]}' />";
+            }
+
+            return $this->settings[$property_name];
+        }
+
+        return '';
     }
 
 }
