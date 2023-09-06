@@ -222,7 +222,7 @@ class Page {
 
         switch ($property_name) {
             case 'favicon':
-                return "<link rel='shortcut icon' type='image' href='{$this->settings[$property_name]}' />";
+                return "<link rel='shortcut icon' type='image' href='/resources/favicon.png' />";
         }
 
         return '';
