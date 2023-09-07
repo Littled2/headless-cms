@@ -23,16 +23,16 @@
 
 
     <!-- If the title property is set, insert here. -->
-    <?php $page->get_property('title') ?>
+    <?php echo $page->get_property('title') ?>
 
     <!-- If the description property is set, insert here. -->
-    <?php $page->get_property('description') ?>
+    <?php echo $page->get_property('description') ?>
 
     <!-- If the og-image property is set, insert here. -->
-    <?php $page->get_property('og-image') ?>
+    <?php echo $page->get_property('og-image') ?>
 
     <!-- If the favicon property is set, insert here. -->
-    <?php $page->get_property('favicon') ?>
+    <?php echo $page->get_property('favicon') ?>
 
 
 
@@ -67,17 +67,19 @@
                 <img class="icon" src="/resources/images/icons/external-link-icon.svg">
             </a>
         </nav>
+    <header>
 
+    </header>
     </header>
 
 
 
 
+    
     <main>
         <!-- Insert the page content in here -->
         <?php echo $page->content; ?>
     </main>
-
 
 
 
@@ -86,7 +88,9 @@
         <p><span class="text-strong">Spotted an issue?</span> Please <a class="accent" href="mailto:excs">Let us know</a> or <a class="accent flex align-center" style="gap: 1em;" href="https://github.com/Exeter-Computer-Science-Society/website"><img class="icon" src="/resources/images/icons/github.svg"> it yourself!</a>!</p>
 
         <p><small>Website built using open source <a href="https://github.com/Littled2/headless-cms" class="underline">headless-cms</a></small></p>
+    <footer>
 
+    </footer>
     </footer>
 
 
