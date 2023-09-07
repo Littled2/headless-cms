@@ -24,7 +24,7 @@ class Client_Side_Router {
         this.cache = {
             [window.location.href]: new Cache_Item({
                 settings: {
-                    title: document.title,
+                    title: document?.title,
                     description: description ? description : '',
                     favicon: favicon ? favicon : ''
                 },
