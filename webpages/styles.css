@@ -1,0 +1,260 @@
+
+/* HERO STYLES */
+
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.uni {
+    width: fit-content;
+    padding: 8px 16px;
+    /* border-radius: var(--border-radius); */
+    font-size: 1.6rem;
+    border: 1.6px var(--text-light-colour) solid;
+    background-color: var(--primary-colout);
+    margin-bottom: var(--spacing-medium);
+}
+
+.uni .icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+}
+
+#logo-svg {
+    width: 100%;
+    transition: 0.4s;
+}
+
+.loading-animation-ended #logo-svg {
+    width: 20vw;
+    height: min-content;
+}
+
+.scroll-icon {
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.4rem;
+    animation: scrollIconBob 0.8s infinite;
+}
+
+#top-society-info {
+    opacity: 0;
+    animation: infoEnter 1s forwards 0.1s;
+}
+
+#society-name {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc((3rem / 7) * 5);
+}
+
+#society-name > img {
+    height: 3rem;
+}
+
+@keyframes infoEnter {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollIconBob {
+    0% {
+        bottom: 2rem;
+    }
+    50% {
+        bottom: calc(2rem - 12px);
+    }
+    100% {
+        bottom: 2rem;
+    }
+}
+
+
+
+
+
+
+.big-card {
+    padding: var(--spacing-medium);
+}
+
+.big-card p {
+    font-size: 1.2rem;
+}
+
+
+
+
+
+/* NEW THIS YEAR STYLES */
+
+.new-this-year {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+    margin-top: 2rem;
+}
+
+.new-this-year a {
+    margin-bottom: var(--spacing-medium);
+    padding: var(--spacing-medium);
+    display: flex;
+    gap: var(--spacing-medium);
+    border-radius: var(--border-radius);
+    background-color: var(--primary-colour);
+    border: 1px var(--secondary-colour) solid;
+    font-size: 1.1rem;
+}
+
+.new-this-year a:hover {
+    border-color: var(--accent-colour);
+}
+
+.new-this-year .number {
+    height: 2rem;
+}
+
+.new-this-year .name {
+    font-size: 1.6rem;
+    color: var(--text-strong-colour);
+}
+
+.new-this-year .item-img {
+    width: 50%;
+}
+
+.new-this-year .item-img > img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    min-height: 12rem;
+    min-width: 12rem;
+    object-fit: contain;
+}
+
+
+
+
+
+
+/* SMALL COMMITTEE CARDS STYLES */
+.committee {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    justify-content: center;
+    gap: var(--spacing-small);
+}
+
+.committee .person {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.committee .person .name {
+    color: var(--text-middle-colout);
+}
+
+.committee .person .role {
+    color: var(--text-strong-colour);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.committee .person .image {
+    position: relative;
+    border: 1.2px solid var(--text-light-colour);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.committee .person .image > img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.committee .person .image > .logo {
+    padding: 4px;
+    background-color: var(--bg-colour);
+    border-radius: var(--border-radius);
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+}
+
+.committee .person .image > .logo > img {
+    height: 2rem;
+    line-height: 0;
+}
+
+
+.committee .drawer {
+    display: flex;
+    gap: 8px;
+}
+
+.committee .drawer > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+}
+
+
+
+
+
+
+/* GET IN CONTACT STYLES */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* SOCIAL MEDIA LINKS */
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+}
+
+.socials > a {
+    width: max-content;
+    padding: var(--spacing-small);
+    border-radius: var(--border-radius);
+    border: 1.2px solid var(--secondary-colour);
+    background-color: var(--primary-colour);
+    display: flex;
+    gap: 0.8em;
+    align-items: center;
+}

@@ -1,0 +1,69 @@
+.committee {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: var(--spacing-medium);
+}
+
+.committee .person {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-medium);
+    gap: var(--spacing-medium);
+    text-align: left;
+}
+
+.committee .person .name {
+    color: var(--text-middle-colout);
+}
+
+.committee .person .role {
+    color: var(--text-strong-colour);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.committee .person .image {
+    position: relative;
+    border: 1.2px solid var(--text-light-colour);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    width: 5rem;
+    height: 5rem;
+}
+
+.committee .person .image > img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.committee .person .image > .logo {
+    padding: 4px;
+    background-color: var(--bg-colour);
+    border-radius: var(--border-radius);
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+}
+
+.committee .person .image > .logo > img {
+    height: 2rem;
+    line-height: 0;
+}
+
+
+.committee .drawer {
+    display: flex;
+    gap: 8px;
+}
+
+.committee .drawer > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+}
+
+
+

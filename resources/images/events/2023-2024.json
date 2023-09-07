@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Fresher's Social",
+        "time": "22nd Sept 3:30",
+        "location": "The Imperial Wetherspoon, Exeter",
+        "type": "social"
+    },
+    {
+        "name": "STEM Crossover Social",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "British Icons Theme",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "Women in Computer Science",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "Shit Shirts",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "Meet the Leturers",
+        "time": "",
+        "location": "The Old Firehouse, Exeter",
+        "type": "social"
+    },
+    {
+        "name": "Pub Quiz",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "Bowling",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "Maths x Computer Science Crossover",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "The Big Christmas Cocktail Night",
+        "time": "",
+        "location": "",
+        "type": "social"
+    },
+    {
+        "name": "Hack SouthWest",
+        "time": "Feb 13th, 11:00",
+        "location": "The Forum, Exeter",
+        "type": "hackathons"
+    }
+]

@@ -1,0 +1,130 @@
+/* 
+Styles that are available throughout all webpages
+*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+:root {
+    --bg-colour: #121212;
+    --primary-colour: #1c1c1c;
+    --secondary-colour: #313131;
+    --accent-colour: #5efe00;
+
+    --text-strong-colour: #ffffff;
+    --text-middle-colour: #c7c7c7;
+    --text-light-colour: #aaaaaa;
+
+    --page-padding-left: 14%;
+    --page-padding-right: 14%;
+
+    --border-radius: 6px;
+
+    --spacing-small: 16px;
+    --spacing-medium: 28px;
+
+    --sans-font: 'Inter', sans-serif;
+    --mono-font: 'Roboto Mono', monospace;;
+    /* --mono-font: monospace; */
+
+    --gradient-top: var(--primary-colour);
+    --gradient-bottom: #082f0c;
+
+    --gradient-bg: linear-gradient(var(--gradient-top), var(--gradient-bottom));
+
+}
+
+
+
+header {
+    background-color: var(--bg-colour);
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    padding: 16px var(--page-padding-right) 16px var(--page-padding-left); 
+}
+
+header nav {
+    display: flex;
+    gap: var(--spacing-small);
+}
+
+header a {
+    text-decoration: none;
+}
+
+header .top-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .top-logo > img {
+    width: 6rem;
+}
+
+header .link {
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--secondary-colour);
+    background-color: var(--primary-colour);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+header .link:hover {
+    border-color: var(--accent-colour);
+}
+
+header .link .icon {
+    width: 0.75em;
+    height: 0.75em;
+}
+
+main {
+    padding-top: 80px;
+    min-height: 90vh;
+}
+
+main section:first-of-type {
+    padding-top: 0;
+}
+
+section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.page-padding {
+    padding-left: var(--page-padding-left);
+    padding-right: var(--page-padding-right);
+}
+
+footer {
+    background-color: var(--primary-colour);
+    border-top: 0.6px solid var(--secondary-colour);
+    padding-left: var(--page-padding-left);
+    padding-right: var(--page-padding-right);
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+
+body::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+}
+body::-webkit-scrollbar-track {
+    background: var(--primary-colour);        /* color of the tracking area */
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-colour);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+}
+body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-colour);
+}

@@ -1,0 +1,69 @@
+/*
+This file is used to cancel out some of the default
+styles that are usually applied to certian elements
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--bg-colour);
+    font-size: 1rem;
+}
+
+body {
+    font-family: var(--mono-font);
+    color: var(--text-light-colour);
+}
+
+body, h1, h2, h3, h4, h5, p, ul, ol {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+    /* font-family: var(--sans-font); */
+}
+
+h1 {
+    font-size: 2.6rem;
+    color: var(--text-strong-colout);
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--text-strong-colout);
+}
+
+h3 {
+    font-size: 1.6rem;
+    color: var(--text-middle-colout);
+}
+
+h4 {
+    font-size: 1.4rem;
+    color: var(--text-middle-colout);
+}
+
+h5 {
+    font-size: 1.2rem;
+    color: var(--text-middle-colout);
+}
+
+p {
+    line-height: 180%;
+}
+
+a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+}
+
+ul, ol {
+    padding: 0;
+}

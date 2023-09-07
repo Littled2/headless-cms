@@ -1,0 +1,15 @@
+
+.error-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12%;
+    gap: 24px;
+    min-height: 80vh;
+}
+
+.code {
+    font-family: var(--mono-font);
+    font-size: 4rem;
+}
