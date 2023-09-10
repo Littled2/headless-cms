@@ -12,6 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1c1c1c">
 
     <!-- Import the Client Side Router -->
     <!-- Remove this if you don't wish to use the client-side routing function of the Headless CMS -->
