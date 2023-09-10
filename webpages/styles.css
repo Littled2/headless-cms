@@ -332,12 +332,19 @@
     }
 
 
+
+
+
+
     /* NEW THIS YEAR */
     .new-this-year a {
         flex-direction: column-reverse;
     }
     .new-this-year .number {
         display: none;
+    }
+    .new-this-year .item-img {
+        width: 100%;
     }
 
 
