@@ -48,9 +48,7 @@
 
 
 </head>
-<body>
-
-
+<body x-data="{ navOpen: false }">
 
     <header>
         
@@ -58,7 +56,8 @@
             <img src="/resources/images/excs-final.svg">
         </a>
 
-        <nav>
+        <nav x-bind:class="navOpen ? 'nav-open' : ''">
+            <a class="link m-show-flex" href="/">Home</a>
             <a class="link" href="/committee">Committee</a>
             <a class="link" href="/stash">Stash</a>
             <a class="link" href="/events">Events</a>
@@ -68,10 +67,12 @@
             </a>
         </nav>
 
+        <button id="nav-toggle" x-bind:class="navOpen ? 'nav-open' : ''" x-on:click="navOpen = !navOpen">
+            <img id="nav-open-image" src="/resources/images/icons/excs-cross.svg">
+            <img id="nav-closed-image" src="/resources/images/icons/excs-menu.svg">
+        </button>
+
     </header>
-
-
-
 
     
     <main>

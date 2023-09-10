@@ -22,6 +22,16 @@
 .hero > canvas {
     width: 100%;
     height: 100%;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 
@@ -221,7 +231,6 @@
     line-height: 0;
 }
 
-
 .committee .drawer {
     display: flex;
     gap: 8px;
@@ -241,6 +250,11 @@
 
 .committee .drawer > a:hover {
     background-color: var(--primary-colour);
+}
+
+.committee-view-all {
+    display: none;
+    justify-content: right;
 }
 
 
@@ -283,4 +297,90 @@
     display: flex;
     gap: 0.8em;
     align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile responsive styles */
+@media screen and (max-width: 800px) {
+
+    html {
+        font-size: 14px;
+    }
+
+    /* HERO STYLES */
+    .uni {
+        font-size: 1rem;
+    }
+    .uni .icon {
+        width: 2rem;
+        height: 2rem;
+    }
+    #society-name {
+        gap: 1.4rem;
+    }
+    #society-name > img {
+        height: 2rem;
+    }
+
+
+    /* NEW THIS YEAR */
+    .new-this-year a {
+        flex-direction: column-reverse;
+    }
+    .new-this-year .number {
+        display: none;
+    }
+
+
+
+
+
+
+
+
+    /* COMMITTEE STYLES */
+    .committee .person {
+        flex-direction: row;
+        text-align: left;
+    }
+    .committee .person .personal-info {
+        flex: 1;
+    }
+    .committee .person .drawer {
+        flex-direction: column;
+        gap: 4px;
+    }
+    .committee .person .drawer a {
+        padding: 2px;
+    }
+    .committee-view-all {
+        display: flex;
+    }
+    .committee .person .image {
+        width: 20vw;
+        height: fit-content;
+    }
+
+
+
+
+
+
+    /* SOCIALS STYLES */
+    .socials {
+        gap: 6px;
+        font-size: 1.4rem;
+    }
+    .socials a > span {
+        display: none;
+    }
 }

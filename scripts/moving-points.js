@@ -1,17 +1,16 @@
 
 
 class Moving_Points {
-    constructor(canvas, points_count) {
+    constructor(canvas) {
 
-        this.points_count = points_count
         this.canvas = canvas
         this.points = []
         this.interval = null
 
         this.ctx = this.canvas.getContext("2d")
-        this.ctx.lineWidth = 0.5
+        this.ctx.lineWidth = 0.25
 
-        window.addEventListener("resize", this.initialise)
+        window.addEventListener("resize", () => this.initialise())
 
         this.initialise()
     }
@@ -26,14 +25,16 @@ class Moving_Points {
 
         this.points = []
 
-        for (let i = 0; i < this.points_count; i++) {
+        const POINTS_COUNT = this.canvas.width > this.canvas.height ? 30 : 15
+
+        for (let i = 0; i < POINTS_COUNT; i++) {
             this.points.push(new Point(this.canvas))
         }
 
 
-        this.MIN_CONNECT_DISTANCE = this.canvas.width / 4
+        this.MIN_CONNECT_DISTANCE = this.canvas.width > this.canvas.height ? this.canvas.width / 6 : this.canvas.height / 4
 
-        this.interval = setInterval(() => this.refresh(), 35)
+        this.interval = setInterval(() => this.refresh(), 30)
 
         this.refresh()
 
@@ -81,7 +82,7 @@ class Moving_Points {
                     this.ctx.beginPath()
                     this.ctx.moveTo(start_x, start_y)
                     this.ctx.lineTo(points_within_reach[j][0], points_within_reach[j][1])
-                    this.ctx.strokeStyle = `rgba(80, 80, 80, ${1 - points_within_reach[j][2]})`
+                    this.ctx.strokeStyle = `rgba(60, 60, 60, ${1 - points_within_reach[j][2]})`
                     this.ctx.stroke()
 
                 }
@@ -112,14 +113,14 @@ class Point{
 
         this.canvas = canvas
 
-        // this.x = this.getRandomNumber(0, this.canvas.width)
-        // this.y = this.getRandomNumber(0, this.canvas.height)
+        this.x = this.getRandomNumber(0, this.canvas.width)
+        this.y = this.getRandomNumber(0, this.canvas.height)
         
         // Start all points in the center
-        this.x = this.canvas.width / 2
-        this.y = this.canvas.height / 2
+        // this.x = this.canvas.width / 2
+        // this.y = this.canvas.height / 2
 
-        this.speed = this.getRandomNumber(1, 10)
+        this.speed = this.getRandomNumber(1, 2)
 
         let angle = this.getRandomNumber(0, 360)
         
@@ -151,5 +152,5 @@ class Point{
 
 
 
-const points_control = new Moving_Points(document.querySelector("#hero-canvas"), 25)
+const points_control = new Moving_Points(document.querySelector("#hero-canvas"), 30)
 

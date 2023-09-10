@@ -69,3 +69,27 @@
     background-color: var(--primary-colour);
 }
 
+
+
+
+
+
+
+
+
+/* Mobile responsive styles */
+@media screen and (max-width: 800px) {
+    .committee {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .committee .person p {
+        font-size: 0.9rem;
+        line-height: 140%;
+    }
+
+    .committee .person .role {
+        font-size: 1.2rem;
+    }
+}

@@ -102,3 +102,41 @@
     background-image: url(/resources/images/icons/excs-right-arrow.svg);
     background-position: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.m-hide {
+    display: unset;
+}
+
+.m-show-flex,
+.m-show-block {
+    display: none !important;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 800px) {
+    .m-hide {
+        display: none;
+    }
+    .m-show-flex {
+        display: flex !important;
+    }
+    .m-show-block {
+        display: block !important;
+    }
+}

@@ -67,3 +67,7 @@ img {
 ul, ol {
     padding: 0;
 }
+
+button {
+    cursor: pointer;
+}
