@@ -1,87 +1,97 @@
-title: Events 📅
+title: EXCS | Events 📅
 
-=================
+=============================
+
 
 <script>
 
-    function create_name(text) {
-        return "<h3 class='excs-arrow-heading'>" + text + "</h3>"
-    }
-
-    function parse_events_json(events) {
+    function parse_events(events) {
         let html = ''
 
-        let wrapper = document.createElement("div")
-        wrapper.classList.add("events")
-
-        let social_wrapper = document.createElement("article")
-        social_wrapper.innerHTML = create_name("Social Events")
-
-        let talks_wrapper = document.createElement("article")
-        talks_wrapper.innerHTML = create_name("Talks")
-
-        let hackathons_wrapper = document.createElement("article")
-        hackathons_wrapper.innerHTML = create_name("Hackathons")
-
-        let academic_wrapper = document.createElement("article")
-        academic_wrapper.innerHTML = create_name("Academic Events")
-
-        let other_wrapper = document.createElement("article")
-        other_wrapper.innerHTML = "<div></div>"
-
-        let social = document.createElement("ul")
-        let talks = document.createElement("ul")
-        let hackathons = document.createElement("ul")
-        let academic = document.createElement("ul")
-        let other = document.createElement("ul")
-
-        social_wrapper.append(social)
-        talks_wrapper.append(talks)
-        hackathons_wrapper.append(hackathons)
-        academic_wrapper.append(academic)
-        other_wrapper.append(other)
-
-        
-        for(const event of events) {
-
-            let li = document.createElement("li")
-            li.innerHTML = `
-                <h5>${event.name}</h5>
-                <p><small>${event.time}</small></p>
-                <p class='location'>${event.location}</p>`
-
-            switch (event?.type) {
-                case 'social':
-                    social.append(li)
-                    break;
-                case 'talks':
-                    talks.append(li)
-                    break;
-                case 'hackathons':
-                    hackathons.append(li)
-                    break;
-                case 'academic':
-                    academic.append(li)
-                    break;
-                default:
-                    console.log("Type not recognised", event?.talks)
-                    other.append(li)
-                    break;
-            }
-
+        if(events.length === 0) {
+            return "<p>No Events</p>"
         }
 
-        wrapper.append(social_wrapper, talks_wrapper, hackathons_wrapper, academic_wrapper, other_wrapper)
+        events.forEach(event => {
+            html += `
+            <li class='event'>
+                <div class='info'>
+                    <h5>${event.name}</h5>
+                    <p>${event.location}</p>
+                </div>
+                <p>${event.time}</p>
+            </li>
+            `
+        })
 
-        return wrapper.outerHTML
+        return html
     }
 
 </script>
 
 
-<section
-    class="flex gap-m events-wrapper"
-    ajax-get="/resources/events/2023-2024.json"
-    ajax-parser="parse_events_json"
-    ajax-options="json:true"
-></section>
+<div class="page-padding" style="margin-bottom: 60px;">
+    <h2 class="excs-arrow-heading">Upcoming Events</h2>
+</div>
+
+<section class="page-padding flex col gap-m">
+
+    <div class="drop-down" x-data="{ open: false }">
+        <div class="top" @click="open = !open">
+            <h3>Social Events</h3>
+            <img x-bind:class="open ? 'open' : ''" class="icon" src="/resources/images/icons/excs-down-icon.svg">
+        </div>
+        <ul
+            x-show="open"
+            x-transition
+            ajax-get="/resources/events/2023-2024/socials.json"
+            ajax-parser="parse_events"
+            ajax-options="json:true"
+        ></ul>
+    </div>
+
+    <div class="drop-down" x-data="{ open: false }">
+        <div class="top" @click="open = !open">
+            <h3>Hackathons</h3>
+            <img x-bind:class="open ? 'open' : ''" class="icon" src="/resources/images/icons/excs-down-icon.svg">
+        </div>
+        <ul
+            x-show="open"
+            x-transition
+            ajax-get="/resources/events/2023-2024/hackathons.json"
+            ajax-parser="parse_events"
+            ajax-options="json:true"
+        ></ul>
+    </div>
+
+    <div class="drop-down" x-data="{ open: false }">
+        <div class="top" @click="open = !open">
+            <h3>Talks</h3>
+            <img x-bind:class="open ? 'open' : ''" class="icon" src="/resources/images/icons/excs-down-icon.svg">
+        </div>
+        <ul
+            x-show="open"
+            x-transition
+            ajax-get="/resources/events/2023-2024/talks.json"
+            ajax-parser="parse_events"
+            ajax-options="json:true"
+        ></ul>
+    </div>
+
+    <div class="drop-down" x-data="{ open: false }">
+        <div class="top" @click="open = !open">
+            <h3>Academic Events</h3>
+            <img x-bind:class="open ? 'open' : ''" class="icon" src="/resources/images/icons/excs-down-icon.svg">
+        </div>
+        <ul
+            x-show="open"
+            x-transition
+            ajax-get="/resources/events/2023-2024/academic.json"
+            ajax-parser="parse_events"
+            ajax-options="json:true"
+        ></ul>
+    </div>
+
+</section>
+
+

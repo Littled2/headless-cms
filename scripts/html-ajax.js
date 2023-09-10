@@ -41,17 +41,17 @@ function ajax_init() {
     })
 
     // Get elements that trigger ajax events
-    document.querySelectorAll("*[ajax-update]").forEach(el => {
+    document.querySelectorAll("*[ajax-event]").forEach(el => {
 
         // Get the name of this trigger
-        let trigger_name =  el.getAttribute("ajax-update")
+        let trigger_name =  el.getAttribute("ajax-event")
         if(!trigger_name) return
 
         // Get the event that causes the trigger, default to click
         let event_name = el.getAttribute("ajax-trigger")
         if(!event_name) {
             // Default is 'click' unless element is a <form>
-            // In which case, teh default trigger is 'ajax-post-complete' event
+            // In which case, the default trigger is 'ajax-post-complete' event
             // This will run after the POST request completes
             event_name = el.tagName !== "FORM" ? "click" : "ajax-post-complete"
         }
@@ -102,17 +102,32 @@ function ajax_init() {
     async function ajax_get(url, element, parser, options) {
         let response
         try {
-            response = await (await fetch(url)).text()
+            let res = await fetch(url)
+            if(!res.ok) throw `Status Code: ${res.status}`
+            response = await res.text()
+
+            // Parse response to JSON
+            if(options?.json) {
+                response = JSON.parse(response)
+            }
+
         } catch (error) {
-            report_error(`something went wrong fetching data from ${url}`, error)
+            report_error(`Something went wrong during ajax-get from: ${url}`, error)
+            element.innerHTML = 'Something went wrong'
+            return
         }
-    
+
         // Check if there is a parser function to parse the data
         // Otherwise just write the exact response
         if(parser) {
-            // If the user requested JSON data, then pass the response to the parser function as parsed JSON
-            response = options?.json ? execute_parser(parser, JSON.parse(response), url) : execute_parser(parser, response, url)        
+            response = execute_parser(parser, response, url)        
         }
+
+        if(options?.['write-as-text']) {
+            element.innerText = response
+            return
+        }
+        
         element.innerHTML = response
     }
     
@@ -123,6 +138,8 @@ function ajax_init() {
                 method: "POST",
                 body: body
             })
+
+            if(!response.ok) throw `Server Returned Status Code: ${response.status}`
 
             // Read the response message from the server
             return await response.text()
@@ -154,6 +171,12 @@ function ajax_init() {
                     v = true
                 } else if (v === "false") {
                     v = false
+                }
+
+                // If key-only
+                if(v === undefined) {
+                    options[k] = true
+                    continue
                 }
     
                 // Assign the value to this key on the options object
@@ -193,7 +216,7 @@ function ajax_init() {
     
     function report_error(message, error) {
         if(error) console.error(error)
-        console.error(`${error ? 'html-ajax: INFO ABOUT THE ABOVE ERROR \n' : ''} ajax-get error: ${message}`)
+        console.error(error ? `html-ajax: INFO ABOUT THE ABOVE ERROR \n ${message}` : `ajax-get ${message}`)
     }
 
 
@@ -216,14 +239,8 @@ function ajax_init() {
         const submit_complete_event = new Event("ajax-post-complete")
         form_element.dispatchEvent(submit_complete_event)
 
-        let shouldOverwrite = true
 
-        // Check if the user does not want the form contents to be overwritten
-        if(options && ("overwrite" in options)) {
-            shouldOverwrite = options["overwrite"]
-        }
-
-        if(!shouldOverwrite) return
+        if(!options || options?.overwrite === false) return
         
         // Default: Write the response over the form
         form_element.innerHTML = response

@@ -8,7 +8,7 @@ Styles that are available throughout all webpages
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 :root {
-    --bg-colour: rgb(20, 20, 20);
+    --bg-colour: #141414;
     --primary-colour: #1c1c1c;
     --secondary-colour: #313131;
     --accent-colour: #5efe00;
