@@ -80,11 +80,7 @@ function does_page_exist($dir_path) {
 function get_requested_path() {
     $requested_file_name = '';
 
-    if(array_key_exists('PATH_INFO', $_SERVER)) {
-        $requested_file_name = $_SERVER['PATH_INFO'];
-    } else {
-        $requested_file_name = explode('?', $_SERVER['REQUEST_URI'])[0];
-    }
+    $requested_file_name = $_SERVER['REQUEST_URI'];
     
     return $requested_file_name;
 }
