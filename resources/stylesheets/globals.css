@@ -2,12 +2,13 @@
 Styles that are available throughout all webpages
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 :root {
-    --bg-colour: #121212;
+    --bg-colour: rgb(20, 20, 20);
     --primary-colour: #1c1c1c;
     --secondary-colour: #313131;
     --accent-colour: #5efe00;
@@ -25,7 +26,7 @@ Styles that are available throughout all webpages
     --spacing-medium: 28px;
 
     --sans-font: 'Inter', sans-serif;
-    --mono-font: 'Roboto Mono', monospace;;
+    --mono-font: 'Roboto Mono', monospace;
     /* --mono-font: monospace; */
 
     --gradient-top: var(--primary-colour);
@@ -34,7 +35,6 @@ Styles that are available throughout all webpages
     --gradient-bg: linear-gradient(var(--gradient-top), var(--gradient-bottom));
 
 }
-
 
 
 header {

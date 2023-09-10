@@ -1,30 +1,37 @@
+title: EXCS 💻
+
+===========================
 
 
-
-<script src="/scripts/load.js"></script>
+<script src="/scripts/landing-page-load.js"></script>
+<script defer src="/scripts/moving-points.js"></script>
 
 
 
 <section class="hero text-center flex col align-center gap-m">
 
-   <section class="flex col align-center gap-m" id="top-society-info">
+   <canvas id="hero-canvas"></canvas>
 
-      <div class="uni flex gap-m align-center">
+   <section class="hero-top flex col justify-center align-center" id="top-society-info">
 
-         <img class="icon" src="/resources/images/icons/exeter-no-bg.png">
-   
-         <span>University of Exeter</span>
-      </div>
-   
-      <div id="society-name">
-         <img src="/resources/images/icons/computer-s-s.svg">
-         <img src="/resources/images/icons/c-science-s.svg">
-         <img src="/resources/images/icons/c-s-society.svg">
+      <div class="flex col gap-m align-center">
+         <div class="uni flex gap-m align-center">
+
+            <img class="icon" src="/resources/images/icons/exeter-no-bg.png">
+      
+            <span>University of Exeter</span>
+         </div>
+      
+         <div id="society-name">
+            <img src="/resources/images/icons/computer-s-s.svg">
+            <img src="/resources/images/icons/c-science-s.svg">
+            <img src="/resources/images/icons/c-s-society.svg">
+         </div>
       </div>
 
    </section>
 
-   <img class="scroll-icon" src="/resources/images/icons/excs-down-icon.svg">
+   <img id="scroll-down-icon" src="/resources/images/icons/excs-down-icon.svg">
 
 </section>
 
@@ -49,19 +56,19 @@
          </p>
       </article>
       <article class="socials">
-         <a>
+         <a href="https://www.instagram.com/exetercompsci/" target="_blank">
             <img class="icon" src="/resources/images/icons/instagram.svg">
             <span>Instagram</span>
          </a>
-         <a>
+         <a href="https://www.facebook.com/ExCompSci/" target="_blank">
             <img class="icon" src="/resources/images/icons/facebook.svg">
             <span>Facebook</span>
          </a>
-         <a>
+         <a href="https://www.linkedin.com/school/exeter-computing-society/" target="_blank">
             <img class="icon" src="/resources/images/icons/linkedin.svg">
             <span>LinkedIn</span>
          </a>
-         <a>
+         <a href="https://www.instagram.com/exetercompsci/" target="_blank">
             <img class="icon" src="/resources/images/icons/discord.svg">
             <span>Discord</span>
          </a>
@@ -72,14 +79,8 @@
          <h3 class="excs-arrow-heading large-heading">New for this year!</h3>
    
          <article class="new-this-year">
-            <a href="/mentorships">
-               <img class="number" src="/resources/images/icons/excs-one.svg">
-               <div>
-                  <b class="name">Our Mentorship Programme</b>
-               </div>
-            </a>
             <a href="hack-sw.excs.uk">
-               <img class="number" src="/resources/images/icons/excs-two.svg">
+               <img class="number" src="/resources/images/icons/excs-one.svg">
                <div class="flex col gap-s space-between">
                   <div>
                      <b class="name">Hack South West</b>
@@ -96,17 +97,39 @@
                </div>
             </a>
             <a href="/academic/flutter-hatless">
-               <img class="number" src="/resources/images/icons/excs-three.svg">
-               <div>
+               <img class="number" src="/resources/images/icons/excs-two.svg">
+               <div class="flex col space-between">
                   <div>
                      <b class="name">Learn Flutter!</b>
                      <p>
-                        <small>An all-new course brought to you by HATLESS Studios.</small>
+                        <small>
+                           Learn to build cross-platform mobile apps using the modern flutter framework!
+                        </small>
                      </p>
                   </div>
+
+                  <p>
+                     <small><small>Brought to you by HATLESS Studios.</small></small>
+                  </p>
                </div>
                <div class="item-img">
                   <img src="/resources/images/flutter.png">
+               </div>
+            </a>
+            <a href="/events">
+               <img class="number" src="/resources/images/icons/excs-three.svg">
+               <div>
+                  <b class="name">A Packed Calendar</b>
+                  <p>
+                     <small>
+                        We are running lots of social and academic events this year.
+                        <br>
+                        View the full list <span class="accent underline">View Here</span>
+                     </small>
+                  </p>
+               </div>
+               <div class="item-img">
+                  <img src="/resources/images/mini-hackathon.png">
                </div>
             </a>
          </article>
@@ -115,13 +138,13 @@
    </section>
    
    
-   <section class="page-padding">
+   <section class="page-padding flex col gap-s">
       <div class="flex align-center space-between">
          <h3 class="excs-arrow-heading">Your Committee</h3>
    
-         <button class="button">
+         <a class="accent" href="/committee">
             View All...
-         </button>
+         </a>
       </div>
    
       <section class="committee">
@@ -130,9 +153,6 @@
    
             <div class="image">
                   <img src="/resources/images/people/ed.jpeg" />
-                  <div class="logo">
-                     <img src="/resources/images/excs.png" />
-                  </div>
             </div>
    
             <div>
@@ -141,10 +161,13 @@
             </div>
    
             <div class="drawer">
-                  <a>
+                  <a href="https://www.linkedin.com/in/edward-blewitt-a1b257224/" target="_blank">
                      <img class="icon" src="/resources/images/icons/linkedin.svg">
                   </a>
-                  <a>
+                  <a href="https://github.com/Littled2/" target="_blank">
+                     <img class="icon" src="/resources/images/icons/github.svg">
+                  </a>
+                  <a href="https://edigital.org.uk/portfolio" target="_blank">
                      <img class="icon" src="/resources/images/icons/world-globe-line-icon.svg">
                   </a>
             </div>
@@ -154,9 +177,6 @@
    
             <div class="image">
                   <img src="/resources/images/people/joachim.jpeg" />
-                  <div class="logo">
-                     <img src="/resources/images/excs.png" />
-                  </div>
             </div>
    
             <div>
@@ -165,7 +185,7 @@
             </div>
    
             <div class="drawer">
-                  <a>
+                  <a href="https://www.linkedin.com/in/joachimstanislaus/" target="_blank">
                      <img class="icon" src="/resources/images/icons/linkedin.svg">
                   </a>
             </div>
@@ -174,10 +194,7 @@
          <div class="person card flex col gap-s">
    
             <div class="image">
-                  <img src="https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg" />
-                  <div class="logo">
-                     <img src="/resources/images/excs.png" />
-                  </div>
+                  <img src="/resources/images/people/james.jpg" />
             </div>
    
             <div>
@@ -186,9 +203,9 @@
             </div>
    
             <div class="drawer">
-                  <a>
-                     <img class="icon" src="/resources/images/icons/linkedin.svg">
-                  </a>
+               <a href="https://www.instagram.com/_jthomas2003/" target="_blank">
+                  <img class="icon" src="/resources/images/icons/instagram.svg">
+               </a>
             </div>
          </div>
    
@@ -196,9 +213,6 @@
    
                <div class="image">
                      <img src="/resources/images/people/wiktor.jpeg" />
-                     <div class="logo">
-                        <img src="/resources/images/excs.png" />
-                     </div>
                </div>
    
                <div>
@@ -207,7 +221,7 @@
                </div>
    
                <div class="drawer">
-                     <a>
+                     <a href="https://www.linkedin.com/in/wiktor-wiejak-703b60206/" target="_blank">
                         <img class="icon" src="/resources/images/icons/linkedin.svg">
                      </a>
                </div>
@@ -217,9 +231,6 @@
    
                <div class="image">
                      <img src="/resources/images/people/callum.jpeg" />
-                     <div class="logo">
-                        <img src="/resources/images/excs.png" />
-                     </div>
                </div>
    
                <div>
@@ -228,28 +239,28 @@
                </div>
    
                <div class="drawer">
-                     <a>
-                        <img class="icon" src="/resources/images/icons/linkedin.svg">
-                     </a>
-               </div>
+                  <a href="https://www.linkedin.com/in/callum-young-6b14b228a/" target="_blank">
+                      <img class="icon" src="/resources/images/icons/linkedin.svg">
+                  </a>
+                  <a href="https://github.com/Cufe12345" target="_blank">
+                      <img class="icon" src="/resources/images/icons/github.svg">
+                  </a>
+              </div>
             </div>
    
             <div class="person card flex col gap-s">
    
                <div class="image">
-                     <img src="https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg" />
-                     <div class="logo">
-                        <img src="/resources/images/excs.png" />
-                     </div>
+                     <img src="/resources/images/people/emily.png" />
                </div>
    
                <div>
                      <p class="role">Media Secretary</p>
-                     <p class="name">Emily</p>
+                     <p class="name">Emily Linard</p>
                </div>
    
                <div class="drawer">
-                     <a>
+                     <a href="www.linkedin.com/in/emily-linard-89251b234" target="_blank">
                         <img class="icon" src="/resources/images/icons/linkedin.svg">
                      </a>
                </div>
@@ -265,8 +276,10 @@
          <div>
             <h2 class="accent">Get in Contact</h2>
             <p>We are very friendly and will reply ASAP :)</p>
+            <br>
          </div>
    
+
          <ul class="flex col gap-s">
             <li class="flex gap-s align-center">
                <img class="icon" src="/resources/images/icons/excs-right-arrow.svg">
@@ -278,22 +291,21 @@
             </li>
          </ul>
    
-
-         <p>Or reach out via any of the following!</p>
+         <p><br>Or reach out via any of the following!</p>
          <article class="socials">
-            <a>
+            <a href="https://www.instagram.com/exetercompsci/" target="_blank">
                <img class="icon" src="/resources/images/icons/instagram.svg">
                <span>Instagram</span>
             </a>
-            <a>
+            <a href="https://www.facebook.com/ExCompSci/" target="_blank">
                <img class="icon" src="/resources/images/icons/facebook.svg">
                <span>Facebook</span>
             </a>
-            <a>
+            <a href="https://www.linkedin.com/school/exeter-computing-society/" target="_blank">
                <img class="icon" src="/resources/images/icons/linkedin.svg">
                <span>LinkedIn</span>
             </a>
-            <a>
+            <a href="https://www.instagram.com/exetercompsci/" target="_blank">
                <img class="icon" src="/resources/images/icons/discord.svg">
                <span>Discord</span>
             </a>

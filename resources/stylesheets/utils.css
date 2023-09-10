@@ -15,12 +15,13 @@
 }
 
 .button {
-    border: 1.2px solid var(--accent-colour);
+    border: 1.6px solid var(--accent-colour);
     padding: 12px;
     color: var(--accent-colour);
     font-family: var(--mono-font);
     background-color: transparent;
-    font-weight: 300;
+    font-weight: 500;
+    border-radius: var(--border-radius);
     display: inline-block;
 }
 
@@ -36,6 +37,10 @@
     height: 1em;
     object-fit: contain;
     display: inline;
+}
+
+.inline-flex {
+    display: inline-flex;
 }
 
 .flex {

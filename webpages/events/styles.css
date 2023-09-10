@@ -1,0 +1,44 @@
+.events-wrapper {
+
+}
+.events {
+    display: flex;
+    gap: var(--spacing-medium);
+    overflow-x: auto;
+    padding-left: var(--page-padding-left);
+}
+
+.events > article {
+    display: flex;
+    flex-direction: column;
+}
+.events ul {
+    margin-top: var(--spacing-medium);
+    list-style-type: none;
+    width: 24rem;
+}
+.events li {
+    padding: var(--spacing-small);
+    margin-bottom: var(--spacing-small);
+    border-radius: var(--border-radius);
+    border: 1px var(--secondary-colour) solid;
+    background-color: var(--primary-colour);
+}
+.events li h5 {
+    color: var(--text-medium-colour);
+}
+.events li .location {
+    display: flex;
+    gap: 0.65em;
+    align-items: center;
+}
+
+.events li .location::before {
+    content: "";
+    width: 0.75em;
+    height: 0.75em;
+    background-size: contain;
+    background-image: url(/resources/images/icons/location-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}

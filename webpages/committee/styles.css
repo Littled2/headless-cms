@@ -37,8 +37,6 @@
 }
 
 .committee .person .image > .logo {
-    padding: 4px;
-    background-color: var(--bg-colour);
     border-radius: var(--border-radius);
     position: absolute;
     right: 4px;
@@ -56,14 +54,18 @@
     gap: 8px;
 }
 
-.committee .drawer > button {
+.committee .drawer > a {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
+    border-radius: var(--border-radius);
     border: none;
-    border-radius: 2px;
+    border-radius: var(--border-radius);
+    padding: 6px;
 }
 
-
+.committee .drawer > a:hover {
+    background-color: var(--primary-colour);
+}
 

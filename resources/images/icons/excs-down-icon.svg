@@ -3,8 +3,8 @@
 
 <svg
    width="185mm"
-   height="212mm"
-   viewBox="0 0 185 212"
+   height="106mm"
+   viewBox="0 0 185 106"
    version="1.1"
    id="svg5"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="0.73228114"
-     inkscape:cx="161.82309"
-     inkscape:cy="271.75355"
+     inkscape:zoom="0.36614057"
+     inkscape:cx="-217.12972"
+     inkscape:cy="527.11995"
      inkscape:window-width="1920"
      inkscape:window-height="1002"
      inkscape:window-x="-8"
@@ -46,101 +46,52 @@
      id="layer1">
     <rect
        style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850"
-       width="25.4"
-       height="25.400002"
-       x="0.52916664"
-       y="0.52916664" />
-    <rect
-       style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-7"
-       width="25.4"
-       height="25.400002"
-       x="26.987499"
-       y="26.987499" />
-    <rect
-       style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-3"
-       width="25.4"
-       height="25.400002"
-       x="79.904167"
-       y="79.904167" />
-    <rect
-       style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-0"
-       width="25.4"
-       height="25.400002"
-       x="53.445835"
-       y="53.445835" />
-    <rect
-       style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-4"
-       width="25.4"
-       height="25.400002"
-       x="106.3625"
-       y="53.445835" />
-    <rect
-       style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-74"
-       width="25.4"
-       height="25.400002"
-       x="132.82083"
-       y="26.987499" />
-    <rect
-       style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-5"
-       width="25.4"
-       height="25.400002"
-       x="159.27916"
-       y="0.52916664" />
-    <rect
-       style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-8"
+       id="rect850-8-3"
        width="25.4"
        height="25.400002"
        x="0.52916104"
-       y="106.36252" />
+       y="0.52918833" />
     <rect
        style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-7-8"
+       id="rect850-7-8-7"
        width="25.4"
        height="25.400002"
        x="26.987495"
-       y="132.82086" />
+       y="26.987532" />
     <rect
        style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-3-4"
+       id="rect850-3-4-8"
        width="25.4"
        height="25.400002"
        x="79.904167"
-       y="185.7375" />
+       y="79.904175" />
     <rect
        style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-0-2"
+       id="rect850-0-2-6"
        width="25.4"
        height="25.400002"
        x="53.445827"
-       y="159.27917" />
+       y="53.445847" />
     <rect
        style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-4-1"
+       id="rect850-4-1-0"
        width="25.4"
        height="25.400002"
        x="106.36251"
-       y="159.27917" />
+       y="53.445847" />
     <rect
        style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-74-9"
+       id="rect850-74-9-0"
        width="25.4"
        height="25.400002"
        x="132.82082"
-       y="132.82086" />
+       y="26.987532" />
     <rect
        style="fill:#5efd00;stroke:#00ff00;stroke-width:0"
-       id="rect850-5-2"
+       id="rect850-5-2-7"
        width="25.4"
        height="25.400002"
        x="159.27916"
-       y="106.36252" />
+       y="0.52918833" />
   </g>
 </svg>

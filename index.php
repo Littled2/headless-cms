@@ -15,7 +15,11 @@
 
     <!-- Import the Client Side Router -->
     <!-- Remove this if you don't wish to use the client-side routing function of the Headless CMS -->
-    <script defer src="/headless-cms-scripts/client-side-router.js"></script>
+    <!-- <script defer src="/headless-cms-scripts/client-side-router.js"></script> -->
+
+    <!-- Import html-ajax -->
+    <script src="/scripts/html-ajax.js"></script>
+    <script src="/scripts/global.js"></script>
 
     <!-- Import Alpine JS -->
     <!-- Remove this if you don't wish to use Alpine JS across you webpages -->
@@ -57,19 +61,13 @@
         <nav>
             <a class="link" href="/committee">Committee</a>
             <a class="link" href="/stash">Stash</a>
-            <a class="link" href="/mentorships">
-                <span class="accent">new</span>
-                <span>Mentoring</span>
-            </a>
             <a class="link" href="/events">Events</a>
-            <a class="link" href="https://my.exeterguild.com/groups/QRM97/computer-science-society/memberships">
+            <a target="_blank" class="link" href="https://my.exeterguild.com/groups/QRM97/computer-science-society/memberships">
                 <span>Memberships</span>
                 <img class="icon" src="/resources/images/icons/external-link-icon.svg">
             </a>
         </nav>
-    <header>
 
-    </header>
     </header>
 
 
@@ -83,14 +81,27 @@
 
 
 
-    <footer class="flex col gap-m text-center">
+    <footer class="flex col gap-m">
 
-        <p><span class="text-strong">Spotted an issue?</span> Please <a class="accent" href="mailto:excs">Let us know</a> or <a class="accent flex align-center" style="gap: 1em;" href="https://github.com/Exeter-Computer-Science-Society/website"><img class="icon" src="/resources/images/icons/github.svg"> it yourself!</a>!</p>
+        <p class="text-center">
+            <span class="text-strong">Spotted an issue?</span>
+            Please
+            <a class="accent underline" href="mailto:excs@groups.exeterguild.com">Let us know</a>
+             or
+            <a class="accent inline-flex align-center underline" style="gap: 1em;" href="https://github.com/Exeter-Computer-Science-Society/website">
+                fix it yourself!
+            </a>!
+        </p>
 
-        <p><small>Website built using open source <a href="https://github.com/Littled2/headless-cms" class="underline">headless-cms</a></small></p>
-    <footer>
-
-    </footer>
+        <p class="text-center">
+            <small>
+                <span>Website built using open source</span>
+                <a target="_blank" class="inline-flex align-center underline" style="gap: 0.5em;" href="https://github.com/Littled2/headless-cms">
+                    <span>headless-cms</span>
+                    <img class="icon" src="/resources/images/icons/external-link-icon.svg">
+                </a>
+            </small>
+        </p>
     </footer>
 
 
