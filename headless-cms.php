@@ -78,9 +78,8 @@ function does_page_exist($dir_path) {
 }
 
 function get_requested_path() {
-    $requested_file_name = '';
 
-    $requested_file_name = $_SERVER['REQUEST_URI'];
+    $requested_file_name = parse_url($_SERVER['REQUEST_URI'])["path"];
     
     return $requested_file_name;
 }
