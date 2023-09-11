@@ -200,11 +200,15 @@ class Page {
 
             switch ($property_name) {
                 case 'title':
-                    return "<title>{$this->settings[$property_name]}</title>";
+                    return "<title>{$this->settings[$property_name]}</title><meta property='og:title' content='{$this->settings[$property_name]}' />";
                 case 'description':
                     return "<meta name='description' content='{$this->settings[$property_name]}'><meta name='og:description' content='{$this->settings[$property_name]}'>";
                 case 'og-image':
                     return "<meta property='og:image' content='{$this->settings[$property_name]}' />";
+                case 'og-url':
+                    return "<meta property='og:url' content='{$this->settings[$property_name]}' />";
+                case 'og-type':
+                    return "<meta property='og:type' content='{$this->settings[$property_name]}' />";
                 case 'favicon':
                     return "<link rel='shortcut icon' type='image' href='{$this->settings[$property_name]}' />";
             }

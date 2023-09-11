@@ -6,7 +6,7 @@
 // - title
 // - description
 // - favicon
-// NOT og-image
+// NOT og-image, og-type, or og-url
 
 // (These settings use the same names as specified in the README file of the headless-cms repository)
 
@@ -229,3 +229,83 @@ class Cache_Item {
 
 // Initialise the client router
 window.router = new Client_Side_Router
+
+// Store events to be run when specific pages are loaded
+window.pageLoadEvents = {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// HELPER FUNCTIONS FOR WORKING WITH THE CSR
+// Used to trigger javascript functions when a specific page or pages is/are loaded
+
+
+/**
+ * Adds an event to be run when a specific page loads
+ * @param {String} valid_url The path that you want the callback to trigger on
+ * @param {Function} callback The function to be run when the page with this 'path' loads
+ */
+export function onPageLoad(path, callback) {
+    if(!(path in window.pageLoadEvents)) {
+        window.pageLoadEvents[path] = []
+    }
+
+    window.pageLoadEvents[path].push(callback)
+
+    console.log(window.pageLoadEvents)
+
+}
+
+
+/**
+ * Adds an event handler to be run when multiple paths are loaded
+ * @param {String[]} paths The paths that you want the callback to trigger on
+ * @param {Function} callback The function to be run when a page with a matching path loads
+ */
+export function onPagesLoad(paths, callback) {
+    paths.forEach(path => onPageLoad(path, callback))
+}
+
+
+
+
+
+
+
+
+
+
+window.addEventListener("load", () => {
+
+    const path = window.location.pathname
+
+    if(!(path in window.pageLoadEvents)) return
+
+    for (let i = 0; i < window.pageLoadEvents[path].length; i++) {
+
+        const callback = window.pageLoadEvents[path][i]
+
+        try {
+
+            // Run the callback
+            callback()
+
+        } catch (error) {
+            console.error(error)
+            console.trace()
+        }
+        
+    }
+})

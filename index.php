@@ -14,7 +14,7 @@
 
     <!-- Import the Client Side Router -->
     <!-- Remove this if you don't wish to use the client-side routing function of the Headless CMS -->
-    <script defer src="/headless-cms-scripts/client-side-router.js"></script>
+    <script type="module" src="/headless-cms-scripts/client-side-router.js"></script>
 
     <!-- Import Alpine JS -->
     <!-- Remove this if you don't wish to use Alpine JS across you webpages -->
@@ -30,12 +30,22 @@
     <!-- If the og-image property is set, insert here. -->
     <?php echo $page->get_property('og-image') ?>
 
-    <!-- If the favicon property is set, insert here. -->
+    <!-- If the og-type property is set, insert here. -->
+    <?php echo $page->get_property('og-type') ?>
+
+    <!-- If the og-url property is set, insert here. -->
+    <?php echo $page->get_property('og-url') ?>
+
+    <!-- If the favicon property is set, insert here. Default value is '/resources/favicon.png' -->
     <?php echo $page->get_property('favicon') ?>
 
 
 
-    <!-- Add stylesheet imports here -->
+    <script type="module" src="/scripts/global.js"></script>
+
+
+
+    <!-- Add global stylesheet imports here -->
 
 
 

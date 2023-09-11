@@ -83,7 +83,6 @@ only equals '=' characters.
 <!-- These are the page settings -->
 Title: My Webpage
 Description: This is the description of the webpage
-Hide_Heading
 =================
 
 <h1>This is a heading</h1>
@@ -93,27 +92,64 @@ Hide_Heading
 
 **Note:** Page Settings supports *inline* HTML comments. Not multiline!
 
-### Supported page settings:
+### Supported Page Settings
+Note: *Page setting names (keys) are NOT case-sensitive. Eg. to set the title both 'Title' and 'title' will work fine*
+
+#### Basic Setting
 | Setting Name | Value | Description |          
 | ------------ | ----- | ----------- |
-| title        | 'Page Title' | This will set the page's ```<title/>``` tag |
-| description  | 'Page Description' | This will set the page's ```<meta  name="description" />``` tag |
+| title        | 'Page Title' | This will set the page's ```<title/>``` tag. *Note this also sets the og-title property*. |
+| description  | 'Page Description' | This will set the page's ```<meta  name="description" />``` and ```<meta  property="og:description" />``` tags. |
 | favicon      | /resources/... Path to image | This will set the shortcut 'favicon' for this page. The default favicon value is: /resources/favicon.png |
-| og-image | /resources/... Path to image | Use this to set the Open Graph Protocol image, so a link to this page renders well when shared on social media. Learn more about the Open Graph Protocol [here](https://ogp.me/). |
+| og-image | Full URL image | Sets the content of the ```<meta  name="og:image" />``` tag. |
+| og-url | Full URL of this resource | Sets the content of the ```<meta  name="og:url" />``` tag. |
+| og-type | Type of this resource | Sets the content of the ```<meta  name="og:type" />``` tag. See [reference](https://ogp.me/#types) for a list of valid Open Graph types. |
 
-*Page setting names (keys) are NOT case-sensitive. Eg. to set the title both 'Title' and 'title' will work fine*
+
+### Open Graph Protocol
+A lot of the page settings start with 'og-....' This is because these are used to set the content of the ```<meta>``` tags used by the Open Graph Protocol.
+
+The OGP is used to make your links look good well when shared on social media. [Learn more about the OGP.](https://ogp.me/)
+
+
 
 ## Client Side Router (CSR)
-All websites built with this headless CMS use the built-in client side router.
+All websites built with this headless CMS use the built-in client side router by default.
 
 This means that when the user navigates, rather than reloading the entire page the CSR will instead fetch this page and replace the existing page, without performing a full-page navigation.
 
 The CSR also caches the 5 most recently visited pages, this makes navigating back appear almost instant.
 
-### Triggering the CSR
+### Using JavaScript with the CSR
+The CSR effectivley makes your webpage into a single page application. **This means that javascript that is loaded in for specific pages may not work as expected!**
+
+Generally, to avoid complications add ```<script>``` tags to the ```<head>``` of the *index.php* file.
+
+Keep in mind that these scripts will **only be loaded in once**, when the user first arrives at the website. If you want to use JavaScript when a page loads, then make sure it is using a 'load' event listener on the ```window``` object!
+
+For JavaScript that you want to be used on a **specific page(s) only**, headless-cms provides a solution. The two functions ```onPageLoad``` and ```onPagesLoad``` can be used to attach callbacks that will be run when a specific page is loaded.
+
+**Example:**
+
+```js
+import { onPageLoad, onPagesLoad } from "/headless-cms-scripts/client-side-router.js";
+
+
+onPageLoad('/', () => {
+    console.log('Homepage is loaded!')
+})
+
+
+onPagesLoad([ '/about', '/contact' ], () => {
+    console.log('/about OR /contact is loaded')
+})
+```
+
+
+#### Triggering the CSR
 By default the CSR will override the default navigation behavior of any link that points to a page that is from the same origin (Same domain, sub-domains and protocol).
 
-#### Triggering the CSR with JavaScript
+**Example:**
 
 ```js
 // Trigger the Client Side Router to navigate to a URL
@@ -125,11 +161,18 @@ window.router.navigate_to_page(url)
 
 *It should be noted that the CSR is mounted **after** The page has fully loaded.*
 
+
+### Disabling the CSR
+If the above does not sound right for your website no problem! Simply comment out/remove the ```<script>``` tag that imports the CSR from the *index.php* file.
+
+It looks like this:
+```html
+<!-- Import the Client Side Router -->
+<!-- Remove this if you don't wish to use the client-side routing function of the Headless CMS -->
+<script type="module" defer src="/headless-cms-scripts/client-side-router.js"></script>
+```
+
+
+
 ## Other Points to Note
 - By default, AlpineJS is imported to every webpage, if you don't with to use AlpineJS in your website, simply remove the import tag from the **index.php** file.
-
-
-
-# Future Work
-- Example directory structure that follows the CMS' structure
-- Tool to build static site
