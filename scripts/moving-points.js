@@ -1,5 +1,4 @@
 
-
 class Moving_Points {
     constructor(canvas) {
 
@@ -149,8 +148,10 @@ class Point{
     }
 }
 
+window.addEventListener("load", init_moving_points)
 
-
-
-const points_control = new Moving_Points(document.querySelector("#hero-canvas"), 30)
+function init_moving_points() {    
+    if(window.location.pathname !== "/") return
+    new Moving_Points(document.querySelector("#hero-canvas"), 30)
+}
 

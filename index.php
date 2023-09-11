@@ -16,11 +16,12 @@
 
     <!-- Import the Client Side Router -->
     <!-- Remove this if you don't wish to use the client-side routing function of the Headless CMS -->
-    <!-- <script defer src="/headless-cms-scripts/client-side-router.js"></script> -->
+    <script defer src="/headless-cms-scripts/client-side-router.js"></script>
 
     <!-- Import html-ajax -->
     <script src="/scripts/html-ajax.js"></script>
     <script src="/scripts/global.js"></script>
+    <script src="/scripts/moving-points.js"></script>
 
     <!-- Import Alpine JS -->
     <!-- Remove this if you don't wish to use Alpine JS across you webpages -->
