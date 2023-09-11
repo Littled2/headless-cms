@@ -16,7 +16,7 @@
 
     <!-- Import the Client Side Router -->
     <!-- Remove this if you don't wish to use the client-side routing function of the Headless CMS -->
-    <!-- <script defer src="/headless-cms-scripts/client-side-router.js"></script> -->
+    <script type="module" src="/headless-cms-scripts/client-side-router.js"></script>
 
     <!-- Import html-ajax -->
     <script src="/scripts/html-ajax.js"></script>
@@ -37,7 +37,13 @@
     <!-- If the og-image property is set, insert here. -->
     <?php echo $page->get_property('og-image') ?>
 
-    <!-- If the favicon property is set, insert here. -->
+    <!-- If the og-type property is set, insert here. -->
+    <?php echo $page->get_property('og-type') ?>
+
+    <!-- If the og-url property is set, insert here. -->
+    <?php echo $page->get_property('og-url') ?>
+
+    <!-- If the favicon property is set, insert here. Default value is '/resources/favicon.png' -->
     <?php echo $page->get_property('favicon') ?>
 
 
@@ -46,6 +52,10 @@
     <link rel="stylesheet" href="/resources/stylesheets/globals.css">
     <link rel="stylesheet" href="/resources/stylesheets/default-styles.css">
     <link rel="stylesheet" href="/resources/stylesheets/utils.css">
+
+
+
+    <!-- Add global stylesheet imports here -->
 
 
 
