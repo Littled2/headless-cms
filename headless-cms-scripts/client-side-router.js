@@ -24,7 +24,7 @@ class Client_Side_Router {
         this.cache = {
             [window.location.href]: new Cache_Item({
                 settings: {
-                    title: document.title,
+                    title: document?.title,
                     description: description ? description : '',
                     favicon: favicon ? favicon : ''
                 },
@@ -80,6 +80,8 @@ class Client_Side_Router {
             navigationComplete = true
             // Cancel the check
             clearTimeout(check)
+            // Scroll to top of page
+            window.scrollTo(0, 0)
             console.log("CSR Navigated to", url)
         })
         .catch(err => {
