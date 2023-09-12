@@ -41,10 +41,6 @@
 
 
 
-    <script type="module" src="/scripts/global.js"></script>
-
-
-
     <!-- Add global stylesheet imports here -->
 
 

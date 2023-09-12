@@ -110,7 +110,12 @@ class Client_Side_Router {
         }
 
         // Write html to page
-        document.querySelector("main").innerHTML = pageData.content
+        const MAIN_ELEMENT = document.querySelector("main")
+
+        const initialDisplay = MAIN_ELEMENT.style.display
+        MAIN_ELEMENT.style.display = "none"
+        MAIN_ELEMENT.innerHTML = pageData.content
+        MAIN_ELEMENT.style.display = initialDisplay
 
         this.apply_page_settings(pageData.settings)
 
@@ -140,9 +145,11 @@ class Client_Side_Router {
         
         // Set the document's title
         document.title = settings?.title ? settings.title : ''
+        document.querySelectorAll('meta[name="og:title"]')
+        .forEach(el => el.setAttribute('content', settings?.title ? settings.title : ''))
 
         // Set the document's description on both the description meta tag and the og: description tag
-        document.querySelectorAll('meta[name=description], meta[name="og:description]"')
+        document.querySelectorAll('meta[name=description], meta[name="og:description"]')
         .forEach(el => el.setAttribute('content', settings?.description ? settings.description : ''))
 
         // Set the document's favicon
@@ -263,9 +270,6 @@ export function onPageLoad(path, callback) {
     }
 
     window.pageLoadEvents[path].push(callback)
-
-    console.log(window.pageLoadEvents)
-
 }
 
 
