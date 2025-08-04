@@ -112,12 +112,13 @@ Note: *Page setting names (keys) are NOT case-sensitive. Eg. to set the title bo
 | og-image | Full URL image | Sets the content of the ```<meta  name="og:image" />``` tag. |
 | og-url | Full URL of this resource | Sets the content of the ```<meta  name="og:url" />``` tag. |
 | og-type | Type of this resource | Sets the content of the ```<meta  name="og:type" />``` tag. See [reference](https://ogp.me/#types) for a list of valid Open Graph types. |
-| cache-ttl | Number of seconds | Only valid in a **template.php** file. Will serve the executed output for the TTL and then re-execute after. **DO NOT** use this for pages with sensitive information. |
+| cache-for | Number of seconds | Only valid in a **template.php** file. Will serve the executed output for the TTL and then re-execute after. **DO NOT** use this for pages with sensitive information. |
 
 #### System-set settings
 These settings **must not be set** by hand and are reserved for use by the system.
 | Setting Name | Value | Description |
-| cache-invalid | Time in seconds | Only used in cached **template.cached** files tells headless cms when to the cached page needs to be re-generated |
+| ------------ | ----- | ----------- |
+| cache-expires | Time in seconds | Only used in cached **template.cached** files tells headless cms when to the cached page needs to be re-generated |
 
 ### Open Graph Protocol
 A lot of the page settings start with 'og-....' This is because these are used to set the content of the ```<meta>``` tags used by the Open Graph Protocol.

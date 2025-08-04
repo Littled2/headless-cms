@@ -32,32 +32,17 @@ function get_page() {
         return handle_error(404);
     }
 
-    $raw_page_content = get_page_content($dir_path);
+    $page = get_parsed_page($dir_path);
     
-    if($raw_page_content == false) {
+    if($page == false) {
         return handle_error(500);
     }
 
-    if($raw_page_content == '') {
-        return new Page($dir_path, '', null);
-    }
-
-    list($hasSettings, $page_parts) = parse_page_content($raw_page_content);
-
-    if($hasSettings && count($page_parts) == 1) {
-        return new Page($dir_path, '', $page_parts[0]);
-    }
-
-    if(count($page_parts) !== 2) {
-        // Then there is no splitter line
-        return new Page($dir_path, $page_parts[0], null);
-    }
-
-    return new Page($dir_path, $page_parts[1], $page_parts[0]);
+    return $page;
 
 }
 
-function get_page_content($dir_path) {
+function get_parsed_page($dir_path) {
     try {
 
         // If there is a template.php file, run it to get the webpage content
@@ -65,62 +50,37 @@ function get_page_content($dir_path) {
         if(is_file(($dir_path . 'template.php'))) {
 
 
-            // // If there is a template.cached file for this GET request, check it's generated time
-            // if(is_file($dir_path . "template.cached." . hash("sha256", $_SERVER["QUERY_STRING"]))) {
+            // Attempt to get a cached file if it exists
 
-            //     $template_content = file_get_contents($dir_path . "template.cached");
+            $cached_page = get_cached_page($dir_path);
 
-            //     // Check the TTL against the generated time
-            //     list($hasSettings, $page_parts) = parse_page_content($template_content);
+            // If cache miss, generate the page
+            if($cached_page === false) {
+                ob_start();
 
-            //     $settings = parse_raw_settings_block($page_parts[0]);
+                // Run the script
+                include $dir_path . 'template.php';
 
-            //     // Test if the cache is still valid
-            //     if(intval($settings["cache-generated"]) > time()) {
-            //         return $template_content;
-            //     }
+                // Get the output and store it as a string
+                $template_content = ob_get_clean();
 
-            // }
-
-            // If there is no template.cached file of the template.cached file is too old            
-
-            ob_start();
-
-            // Run the script
-            include $dir_path . 'template.php';
-
-            // Get the output and store it as a string
-            $template_content = ob_get_clean();
-
-            // list($hasSettings, $page_parts) = parse_page_content($template_content);
-
-            // if($hasSettings) {
-                
-            //     // Parse the settings from the evaluated template
-            //     $settings = parse_raw_settings_block($page_parts[0]);
-
-            //     // If there is a valid cache-ttl, save the template output as template.cached
-            //     if(isset($settings["cache-ttl"]) && is_numeric($settings["cache-ttl"])) {
-                    
-            //         // Save this cached page
-            //         save_cached_page(
-            //             $dir_path . "template.cached." . hash("sha256", $_SERVER["QUERY_STRING"]),
-            //             $page_parts,
-            //             time() + intval($settings["cache-ttl"])
-            //         );
-
-            //     }
-
-            return $template_content;
+                $page = new Page($dir_path, $template_content);
 
 
-            // } else {
-            //     return $template_content;
-            // }
+                if(isset($page->settings["cache-for"]) && is_numeric($page->settings["cache-for"])) {
+                    save_cached_page($dir_path, $template_content, time() + intval($page->settings["cache-for"]));
+                }
+
+                return new Page($dir_path, $template_content);
+
+            } else {
+
+                return $cached_page;
+            }
 
         } else {
             // Get the page.html content
-            return file_get_contents($dir_path . 'page.html');
+            return new Page($dir_path, file_get_contents($dir_path . 'page.html'));
         }
 
     } catch (\Throwable $th) {
@@ -154,77 +114,19 @@ function handle_error($error_code) {
     // Is there an error page
     if(does_page_exist($error_dir_path)) {
 
-        $raw_page_content = get_page_content($error_dir_path);
+        $page = get_parsed_page($error_dir_path);
 
         // Then something went wrong with reading the file
-        if($raw_page_content == false) exit;
+        if($page == false) exit;
 
-        list($hasSettings, $page_parts) = parse_page_content($raw_page_content);
-
-        if($hasSettings && count($page_parts) == 1) {
-            return new Page($error_dir_path, '', $page_parts[0]);
-        }
-
-        if(count($page_parts) !== 2) {
-            // Then there is no splitter line
-            return new Page($error_dir_path, $page_parts[0], null);
-        }
-        
-        return new Page($error_dir_path, $page_parts[1], $page_parts[0]);
+        return $page;
     }
 
-    return new Page($error_dir_path, "<p style='text-align:center;>'Error {$error_code}</p>", null);
+    return new Page($error_dir_path, "<p style='text-align:center;>'Error {$error_code}</p>");
 }
 
-function parse_page_content($page_content) {
 
-    // Does the page have page settings
-    $hasSettings = preg_match('/^.[=]+([\s]+)?$/m', $page_content) > 0;    
 
-    // Split the file on a line of equals characters (The separator between setting and the page content)
-    // From now on, this line will be referred to as a 'splitter' line.
-    $split = preg_split('/^.[=]+([\s]+)?$/m', $page_content);
-
-    return array($hasSettings, $split);
-}
-
-function parse_raw_settings_block($raw_settings_block) {
-
-    $raw_settings_block = preg_replace("/<!--(.*?)-->/", "", $raw_settings_block);
-
-    $temp_settings = array();
-
-    // Iterate over each new line
-    foreach(preg_split("/((\r?\n)|(\r\n?))/", $raw_settings_block) as $line) {
-        // Split the line on the first ':' character
-        $parts = explode(':', $line);
-
-        if(count($parts) == 1) {
-            // Then set as key-only setting
-            $keyName = strtolower(trim($parts[0]));
-
-            // Then key name is invalid
-            if($keyName === '') continue;
-
-            $temp_settings[$keyName] = true;
-            continue;
-        }
-
-        if(count($parts) !== 2) {
-            // Then is malformed settings line
-            continue;
-        }
-
-        // Extract the name (key) of the setting and its respective value
-        $key = strtolower(trim($parts[0]));
-        $value = trim($parts[1]);
-
-        $temp_settings[$key] = $value;
-
-    }
-
-    return $temp_settings;
-}
 
 class Page {
 
@@ -232,11 +134,32 @@ class Page {
     public $settings;
     private $dir_path;
 
-    function __construct($dir_path, $page_content, $raw_settings_block) {
+    function __construct($dir_path, $raw_page_content) {
 
-        $this->content = $page_content;
         $this->dir_path = $dir_path;
 
+
+        list($hasSettings, $page_parts) = $this->parse_page_content($raw_page_content);
+
+        if($hasSettings && count($page_parts) == 1) {
+
+            // If the page has only settings and no content
+            $this->content = '';
+            $this->settings = $this->parse_raw_settings_block($page_parts[0]);
+
+        } elseif(!$hasSettings && count($page_parts) === 1) {
+
+            // If the page has no settings and just content
+            $this->content = $page_parts[0];
+            $this->settings = null;
+
+        } else {
+
+            // If the page has both settings and content
+            $this->content = $page_parts[1];
+            $this->settings = $this->parse_raw_settings_block($page_parts[0]);
+
+        }
 
         // Path to possible styles.css file
         $styles_path = $this->dir_path . 'styles.css';
@@ -246,11 +169,56 @@ class Page {
             $this->content = "<style>\n\n" . file_get_contents($styles_path) . "\n</style>\n\n" . $this->content;
         }
 
-        if($raw_settings_block !== null) {
-            $this->settings = parse_raw_settings_block($raw_settings_block);
-        } else {
-            $this->settings = null;
+    }
+
+    private function parse_page_content($page_content) {
+
+        // Does the page have page settings
+        $hasSettings = preg_match('/^.[=]+([\s]+)?$/m', $page_content) > 0;    
+
+        // Split the file on a line of equals characters (The separator between setting and the page content)
+        // From now on, this line will be referred to as a 'splitter' line.
+        $split = preg_split('/^.[=]+([\s]+)?$/m', $page_content);
+
+        return array($hasSettings, $split);
+    }
+
+    private function parse_raw_settings_block($raw_settings_block) {
+
+        $raw_settings_block = preg_replace("/<!--(.*?)-->/", "", $raw_settings_block);
+
+        $temp_settings = array();
+
+        // Iterate over each new line
+        foreach(preg_split("/((\r?\n)|(\r\n?))/", $raw_settings_block) as $line) {
+            // Split the line on the first ':' character
+            $parts = explode(':', $line);
+
+            if(count($parts) == 1) {
+                // Then set as key-only setting
+                $keyName = strtolower(trim($parts[0]));
+
+                // Then key name is invalid
+                if($keyName === '') continue;
+
+                $temp_settings[$keyName] = true;
+                continue;
+            }
+
+            if(count($parts) !== 2) {
+                // Then is malformed settings line
+                continue;
+            }
+
+            // Extract the name (key) of the setting and its respective value
+            $key = strtolower(trim($parts[0]));
+            $value = trim($parts[1]);
+
+            $temp_settings[$key] = $value;
+
         }
+
+        return $temp_settings;
     }
 
     function get_property($property_name) {
@@ -290,12 +258,58 @@ class Page {
 }
 
 
+/**
+ * Returns the contents of an in-date cached template.php page if it exists
+ */
+function get_cached_page($dir_path) {
+
+    $GET_hash = hash("sha256", $_SERVER["QUERY_STRING"]);
+
+    $file_path = $dir_path . "template.cached." . $GET_hash;
+
+    if(is_file($file_path)) {
+
+        $cache_content = file_get_contents($file_path);
+
+        // Check the TTL against the generated time. There will always be a settings block as pages are only cached
+        // if the cache-for setting is set
+
+        $page = new Page($dir_path, $cache_content);
+
+        // Test if current time is before expiry
+        if(time() < intval($page->settings["cache-expires"])) {
+
+            return $page;
+
+        } else {
+            
+            // Delete invalid cache file
+            unlink($file_path);
+
+            return false;
+        }
+
+    }
+    
+    // If file does not exist
+    return false;
+}
 
 
-function save_cached_file($file_path, $page_parts, $cache_invalid) {
+
+/**
+ * Saves the executed template page
+ */
+function save_cached_page($dir_path, $page_content, $cache_invalid_at) {
+
+    $GET_hash = hash("sha256", $_SERVER["QUERY_STRING"]);
+
+    $file_path = $dir_path . "template.cached." . $GET_hash;
+
+    $page_content = "generated: " . time() . "\n" . "cache-expires: " . $cache_invalid_at . "\n\n" . $page_content;
 
     // Save the cached file
-    
+    file_put_contents($file_path, $page_content);
 
 }
 
