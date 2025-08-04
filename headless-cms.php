@@ -25,7 +25,7 @@ function get_page() {
         $requested_path = $requested_path . '/';
     }
 
-    // Path to page.html file
+    // Absolute path to root of webpage file
     $dir_path = __DIR__ . '/webpages' . $requested_path;
 
     if(!does_page_exist($dir_path)) {
@@ -60,8 +60,68 @@ function get_page() {
 function get_page_content($dir_path) {
     try {
 
-        // Get the page.html content
-        return file_get_contents($dir_path . 'page.html');
+        // If there is a template.php file, run it to get the webpage content
+
+        if(is_file(($dir_path . 'template.php'))) {
+
+
+            // // If there is a template.cached file for this GET request, check it's generated time
+            // if(is_file($dir_path . "template.cached." . hash("sha256", $_SERVER["QUERY_STRING"]))) {
+
+            //     $template_content = file_get_contents($dir_path . "template.cached");
+
+            //     // Check the TTL against the generated time
+            //     list($hasSettings, $page_parts) = parse_page_content($template_content);
+
+            //     $settings = parse_raw_settings_block($page_parts[0]);
+
+            //     // Test if the cache is still valid
+            //     if(intval($settings["cache-generated"]) > time()) {
+            //         return $template_content;
+            //     }
+
+            // }
+
+            // If there is no template.cached file of the template.cached file is too old            
+
+            ob_start();
+
+            // Run the script
+            include $dir_path . 'template.php';
+
+            // Get the output and store it as a string
+            $template_content = ob_get_clean();
+
+            // list($hasSettings, $page_parts) = parse_page_content($template_content);
+
+            // if($hasSettings) {
+                
+            //     // Parse the settings from the evaluated template
+            //     $settings = parse_raw_settings_block($page_parts[0]);
+
+            //     // If there is a valid cache-ttl, save the template output as template.cached
+            //     if(isset($settings["cache-ttl"]) && is_numeric($settings["cache-ttl"])) {
+                    
+            //         // Save this cached page
+            //         save_cached_page(
+            //             $dir_path . "template.cached." . hash("sha256", $_SERVER["QUERY_STRING"]),
+            //             $page_parts,
+            //             time() + intval($settings["cache-ttl"])
+            //         );
+
+            //     }
+
+            return $template_content;
+
+
+            // } else {
+            //     return $template_content;
+            // }
+
+        } else {
+            // Get the page.html content
+            return file_get_contents($dir_path . 'page.html');
+        }
 
     } catch (\Throwable $th) {
         
@@ -71,7 +131,7 @@ function get_page_content($dir_path) {
 }
 
 function does_page_exist($dir_path) {
-    if(is_file(($dir_path . 'page.html'))) {
+    if(is_file(($dir_path . 'page.html')) || is_file($dir_path . 'template.php')) {
         return true;
     }
     return false;
@@ -90,7 +150,7 @@ function handle_error($error_code) {
     http_response_code($error_code);
 
     $error_dir_path = __DIR__ . '/errors' . '/' . $error_code . '/' ;
-
+    
     // Is there an error page
     if(does_page_exist($error_dir_path)) {
 
@@ -226,6 +286,16 @@ class Page {
 
         return '';
     }
+
+}
+
+
+
+
+function save_cached_file($file_path, $page_parts, $cache_invalid) {
+
+    // Save the cached file
+    
 
 }
 

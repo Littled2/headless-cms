@@ -57,6 +57,7 @@
     <main>
         <!-- Insert the page content in here -->
         <?php echo $page->content; ?>
+        
     </main>
 
 

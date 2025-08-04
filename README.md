@@ -18,7 +18,7 @@ For example: A website with three webpages, at paths: **/**, **/contact-us**, an
 │
 └── projects/
     │
-    └── my-first-project
+    └── my-first-project/
         │
         └── page.html
 ```
@@ -40,6 +40,14 @@ Description: This is the description of the webpage
 
 Read more about page settings later on.
 
+## Templates
+
+Templates allow you to dynamically generate a webpage on the server then send it to a client.
+
+To make a template, create a template.php file in the webpage's directory. The template will be executed and its output will be inserted into the main index.php file, the same as any page.html file.
+
+*If both a template.php and a page.html file exist in a directory, the template.php file will be executed.*
+
 
 ## Stylesheets
 Headless CMS supports two ways of using stylesheets, depending on whether you want the CSS styles to be available globally across all page, or just on a specific page.
@@ -53,7 +61,7 @@ If styles are only intended to be used on one webpage, reduce unused CSS by addi
 For example: If the page at **/test** required some page-specific styles you would create the file **/webpages/test/styles.css**. The styles in this file will *automatically* be inserted with the page content from the **page.html** file.
 
 
-## General Resources
+## Other Resources
 To store any resources such as stylesheets or images, store them in the **/resources** directory.
 
 Make sure when you reference them in a webpage, you include the **/resources/...** directory name.
@@ -65,12 +73,12 @@ For Example: Referencing an image stored at **/resources/images/photo.png** woul
 ```
 
 ### Importing Scripts
-For JavaScript scripts, there is also the option of storing the, in the **/scripts** directory.
+For JavaScript scripts, they should be stored in the **/scripts** directory.
 
 ## Custom Error Pages
-If you wish for your website to have custom error pages, then create a file with the name: **{HTTP Error Code}.html** in the **/errors** directory.
+If you wish for your website to have custom error pages, then create a file to handle that error code at **/errors/{HTTP Error Code}/page.html**.
 
-For example, a custom 404 page would be created at: **/errors/404.html**
+For example, a custom 404 page would be created at: **/errors/404/page.html**. If wanted, you could use a **template.php** file.
 
 These pages are inserted into the **index.php** file in the same way as any other page.
 
@@ -104,13 +112,17 @@ Note: *Page setting names (keys) are NOT case-sensitive. Eg. to set the title bo
 | og-image | Full URL image | Sets the content of the ```<meta  name="og:image" />``` tag. |
 | og-url | Full URL of this resource | Sets the content of the ```<meta  name="og:url" />``` tag. |
 | og-type | Type of this resource | Sets the content of the ```<meta  name="og:type" />``` tag. See [reference](https://ogp.me/#types) for a list of valid Open Graph types. |
+| cache-ttl | Number of seconds | Only valid in a **template.php** file. Will serve the executed output for the TTL and then re-execute after. **DO NOT** use this for pages with sensitive information. |
 
+#### System-set settings
+These settings **must not be set** by hand and are reserved for use by the system.
+| Setting Name | Value | Description |
+| cache-invalid | Time in seconds | Only used in cached **template.cached** files tells headless cms when to the cached page needs to be re-generated |
 
 ### Open Graph Protocol
 A lot of the page settings start with 'og-....' This is because these are used to set the content of the ```<meta>``` tags used by the Open Graph Protocol.
 
 The OGP is used to make your links look good well when shared on social media. [Learn more about the OGP.](https://ogp.me/)
-
 
 
 ## Client Side Router (CSR)
@@ -119,6 +131,7 @@ All websites built with this headless CMS use the built-in client side router by
 This means that when the user navigates, rather than reloading the entire page the CSR will instead fetch this page and replace the existing page, without performing a full-page navigation.
 
 The CSR also caches the 5 most recently visited pages, this makes navigating back appear almost instant.
+
 
 ### Using JavaScript with the CSR
 The CSR effectivley makes your webpage into a single page application. **This means that javascript that is loaded in for specific pages may not work as expected!**
