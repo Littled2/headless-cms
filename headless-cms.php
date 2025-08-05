@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Called to process every request to the server
  */

@@ -6,7 +6,7 @@
 // - title
 // - description
 // - favicon
-// NOT og-image, og-type, or og-url
+// NOT og-image, og-type, og-url, or cache-for
 
 // (These settings use the same names as specified in the README file of the headless-cms repository)
 
@@ -60,7 +60,7 @@ class Client_Side_Router {
     /**
      * Navigates the user to a new webpage.
      * Attempts to navigate via the client-side router but defaults to normal
-     * full-page navigation after a certain time
+     * full-page navigation after five seconds
      */
     navigate_to_page(url, navigateBack=false) {
 
