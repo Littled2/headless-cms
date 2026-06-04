@@ -44,9 +44,17 @@ Read more about page settings later on.
 
 Templates allow you to dynamically generate a webpage on the server then send it to a client.
 
-To make a template, create a template.php file in the webpage's directory. The template will be executed and its output will be inserted into the main index.php file, the same as any page.html file.
+To make a template, create a `template.php` file in the webpage's directory. The template will be executed and its output will be inserted into the main index.php file, the same as any page.html file.
 
 *If both a template.php and a page.html file exist in a directory, the template.php file will be executed.*
+
+### Template Caching
+
+By default, generated template pages are **not** cached.
+
+If you want a page to be cached, you must add the `cache-for` page setting, and provide an integer number of seconds to cache the page for.
+
+Cached pages are cached for their query string, so two requests to the same template with different query strings would result in different cached pages.
 
 
 ## Stylesheets
