@@ -264,7 +264,7 @@ class Page {
  */
 function get_cached_page($dir_path) {
 
-    $GET_hash = hash("sha256", $_SERVER["QUERY_STRING"]);
+    $GET_hash = hash("sha256", $_SERVER["QUERY_STRING"] ?? '');
 
     $file_path = $dir_path . "template.cached." . $GET_hash;
 
@@ -303,7 +303,7 @@ function get_cached_page($dir_path) {
  */
 function save_cached_page($dir_path, $page_content, $cache_invalid_at) {
 
-    $GET_hash = hash("sha256", $_SERVER["QUERY_STRING"]);
+    $GET_hash = hash("sha256", $_SERVER["QUERY_STRING"] ?? '');
 
     $file_path = $dir_path . "template.cached." . $GET_hash;
 

@@ -51,6 +51,8 @@
 
     <header>
 
+    header
+
     </header>
 
     
@@ -62,6 +64,8 @@
 
 
     <footer>
+
+    footer
 
     </footer>
 
